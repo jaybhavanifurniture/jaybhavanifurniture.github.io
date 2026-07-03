@@ -1,11 +1,115 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import OfferingCard from '../components/OfferingCard.astro';
+import CTASection from '../components/CTASection.astro';
+import showroom from '../data/showroom.json';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title="Home">
+  <Hero
+    title="Made in Navsari with thoughtful craft<br />and durable materials."
+    subtitle="A Navsari workshop crafting furniture from responsibly selected timber and premium modern materials."
+    imageSrc="https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?auto=format&fit=crop&w=2070&q=80"
+    imageAlt="Solid wood furniture piece showing detailed joinery"
+    actions={[
+      { text: 'Visit our showroom', href: showroom.mapUrl, icon: 'tabler:map-pin', external: true },
+      { text: 'Message us on WhatsApp', href: showroom.whatsappUrl, icon: 'tabler:brand-whatsapp', variant: 'secondary', external: true },
+    ]}
+  />
+
+  <!-- Trust Bar -->
+  <div class="border-b border-wood-200 bg-wood-50 dark:border-wood-800 dark:bg-wood-950">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-4 px-4 py-6 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-2 text-sm font-medium text-neutral-600 dark:text-neutral-400">
+        <span class="flex h-2 w-2 rounded-full bg-amber-500"></span>
+        Founded in {showroom.foundedYear}
+      </div>
+      <div class="flex items-center gap-2 text-sm font-medium text-neutral-600 dark:text-neutral-400">
+        <span class="flex h-2 w-2 rounded-full bg-amber-500"></span>
+        Based in Navsari, Gujarat
+      </div>
+      <div class="flex items-center gap-2 text-sm font-medium text-neutral-600 dark:text-neutral-400">
+        <span class="flex h-2 w-2 rounded-full bg-amber-500"></span>
+        In-House Workshop
+      </div>
+      <div class="flex items-center gap-2 text-sm font-medium text-neutral-600 dark:text-neutral-400">
+        <span class="flex h-2 w-2 rounded-full bg-amber-500"></span>
+        Real Solid Wood
+      </div>
+    </div>
+  </div>
+
+  <!-- Offerings -->
+  <section class="py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl">
+          How we can help you
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
+          Whether you're furnishing your own home or executing a client's design, we provide the craftsmanship you need. Based in Navsari, we design, deliver, and install custom furniture across Gujarat and Maharashtra.
+        </p>
+      </div>
+
+      <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <OfferingCard
+          title="Showroom & Bespoke Pieces"
+          description="Visit our Navsari showroom to explore our collection. Purchase displayed items or customize dimensions to perfectly suit your space."
+          href="/showroom/"
+          icon="tabler:sofa"
+        />
+        <OfferingCard
+          title="Designer Collaboration"
+          description="We collaborate with design teams to deliver tailored interiors built from premium materials."
+          href="/trade/"
+          icon="tabler:ruler-measure"
+        />
+        <OfferingCard
+          title="Custom Interior Joinery"
+          description="Our workshop provides fabrication for custom interiors, working closely with designers and homeowners."
+          href="/design-build/"
+          icon="tabler:home-cog"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Heritage / About Snippet -->
+  <section class="bg-wood-50 py-16 dark:bg-wood-900 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div class="relative">
+          <img
+            src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80"
+            alt="Woodworking workshop"
+            class="rounded-xl shadow-lg"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight text-wood-900 dark:text-wood-100 sm:text-4xl">
+            Direct from our workshop.
+          </h2>
+          <p class="mt-6 text-lg leading-relaxed text-wood-800 dark:text-wood-200">
+            Every piece is shaped and finished in our own workshop, with material quality and craft under our care.
+          </p>
+          <p class="mt-4 text-lg leading-relaxed text-wood-800 dark:text-wood-200">
+            Since {showroom.foundedYear}, we design and build each item in-house, pairing traditional workshop skill with carefully chosen materials.
+          </p>
+          <div class="mt-8">
+            <a
+              href="/about/"
+              class="inline-flex items-center gap-2 font-semibold text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+            >
+              See our workshop story
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

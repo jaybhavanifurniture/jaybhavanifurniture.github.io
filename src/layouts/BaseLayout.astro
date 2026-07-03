@@ -1,0 +1,129 @@
+---
+import '../styles/global.css';
+import showroom from '../data/showroom.json';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = showroom.description,
+  ogImage = '/assets/logo.png',
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = title === 'Home'
+  ? `Jay Bhavani Furniture — Premium Custom Furniture in Navsari, Surat & Gujarat`
+  : `${title} — Jay Bhavani Furniture`;
+
+const currentYear = new Date().getFullYear();
+const yearsInBusiness = currentYear - showroom.foundedYear;
+
+// JSON-LD structured data
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['FurnitureStore', 'ProfessionalService'],
+  name: showroom.name,
+  description: showroom.description,
+  url: Astro.site?.toString(),
+  telephone: showroom.phoneTel,
+  email: showroom.email,
+  foundingDate: String(showroom.foundedYear),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: showroom.address,
+    addressLocality: showroom.city,
+    addressRegion: showroom.region,
+    postalCode: showroom.postalCode,
+    addressCountry: showroom.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: showroom.geo.latitude,
+    longitude: showroom.geo.longitude,
+  },
+  openingHoursSpecification: showroom.openingHours.map((slot) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: slot.days,
+    opens: slot.opens,
+    closes: slot.closes,
+  })),
+  areaServed: [
+    { '@type': 'City', name: 'Navsari' },
+    { '@type': 'City', name: 'Surat' },
+    { '@type': 'City', name: 'Valsad' },
+    { '@type': 'City', name: 'Vapi' },
+    { '@type': 'City', name: 'Bilimora' },
+    { '@type': 'City', name: 'Chikhli' },
+    { '@type': 'City', name: 'Vyara' },
+    { '@type': 'City', name: 'Ahmedabad' },
+    { '@type': 'City', name: 'Vadodara' },
+    { '@type': 'City', name: 'Bharuch' },
+    { '@type': 'City', name: 'Ankleshwar' },
+    { '@type': 'City', name: 'Silvassa' },
+    { '@type': 'State', name: 'Gujarat' },
+    { '@type': 'State', name: 'Maharashtra' }
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:site_name" content="Jay Bhavani Furniture" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Dark mode: prevent flash -->
+    <script is:inline>
+      (function () {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-neutral-50 text-neutral-800 dark:bg-neutral-950 dark:text-neutral-200 antialiased">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

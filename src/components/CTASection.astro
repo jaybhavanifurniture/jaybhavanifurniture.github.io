@@ -1,0 +1,93 @@
+---
+import { Icon } from 'astro-icon/components';
+import showroom from '../data/showroom.json';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  variant?: 'default' | 'warm';
+}
+
+const {
+  title = 'Ready to get started?',
+  subtitle = `Visit our showroom in Navsari or reach out — we'd love to hear about your project.`,
+  variant = 'default',
+} = Astro.props;
+---
+
+<section
+  class:list={[
+    'py-16 sm:py-20',
+    variant === 'warm'
+      ? 'bg-wood-600 text-white'
+      : 'bg-neutral-100 dark:bg-neutral-900',
+  ]}
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+    <h2
+      class:list={[
+        'text-2xl font-bold tracking-tight sm:text-3xl',
+        variant === 'warm'
+          ? 'text-white'
+          : 'text-neutral-900 dark:text-neutral-100',
+      ]}
+    >
+      {title}
+    </h2>
+    <p
+      class:list={[
+        'mx-auto mt-4 max-w-2xl text-lg',
+        variant === 'warm'
+          ? 'text-wood-200'
+          : 'text-neutral-600 dark:text-neutral-400',
+      ]}
+    >
+      {subtitle}
+    </p>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <a
+        href={showroom.whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class:list={[
+          'inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition-all duration-200 shadow-sm',
+          variant === 'warm'
+            ? 'bg-green-500 text-white hover:bg-green-600'
+            : 'bg-green-600 text-white hover:bg-green-700',
+        ]}
+      >
+        <Icon name="tabler:brand-whatsapp" class="h-5 w-5" />
+        Message us on WhatsApp
+      </a>
+
+      <a
+        href={`tel:${showroom.phoneTel}`}
+        class:list={[
+          'inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition-all duration-200 border',
+          variant === 'warm'
+            ? 'border-white/30 text-white hover:bg-white/10'
+            : 'border-neutral-300 text-neutral-700 hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800',
+        ]}
+      >
+        <Icon name="tabler:phone" class="h-5 w-5" />
+        Call {showroom.phoneDisplay}
+      </a>
+
+      <a
+        href={showroom.mapUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class:list={[
+          'inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition-all duration-200 border',
+          variant === 'warm'
+            ? 'border-white/30 text-white hover:bg-white/10'
+            : 'border-neutral-300 text-neutral-700 hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800',
+        ]}
+      >
+        <Icon name="tabler:map-pin" class="h-5 w-5" />
+        Visit our showroom
+      </a>
+    </div>
+  </div>
+</section>

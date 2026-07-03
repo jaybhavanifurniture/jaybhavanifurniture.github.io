@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Typography */
+  --font-sans: 'Inter Variable', system-ui, -apple-system, sans-serif;
+
+  /* Wood-inspired palette — warm, earthy, honest */
+  --color-wood-50: #FAF7F2;
+  --color-wood-100: #F0EBE1;
+  --color-wood-200: #E0D5C4;
+  --color-wood-300: #C8B596;
+  --color-wood-400: #B09268;
+  --color-wood-500: #8B6F4E;
+  --color-wood-600: #5C3D2E;
+  --color-wood-700: #4A2F22;
+  --color-wood-800: #2C1810;
+  --color-wood-900: #1A1714;
+  --color-wood-950: #0B0A08;
+
+  /* Amber accent — warm, distinctive, not loud */
+  --color-amber-50: #FFF8EB;
+  --color-amber-100: #FEECC1;
+  --color-amber-200: #FDD889;
+  --color-amber-300: #E8A94D;
+  --color-amber-400: #C8842A;
+  --color-amber-500: #A06B1E;
+  --color-amber-600: #7A5118;
+  --color-amber-700: #5A3B12;
+
+  /* Neutral — for text, backgrounds, surfaces */
+  --color-neutral-50: #FAFAF9;
+  --color-neutral-100: #F5F5F4;
+  --color-neutral-200: #E7E5E4;
+  --color-neutral-300: #D6D3D1;
+  --color-neutral-400: #A8A29E;
+  --color-neutral-500: #78716C;
+  --color-neutral-600: #57534E;
+  --color-neutral-700: #44403C;
+  --color-neutral-800: #292524;
+  --color-neutral-900: #1C1917;
+  --color-neutral-950: #0C0A09;
+}
+
+/* Base resets & defaults */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-neutral-800);
+  background-color: var(--color-neutral-50);
+}
+
+/* Dark mode */
+.dark body {
+  color: var(--color-neutral-200);
+  background-color: var(--color-neutral-950);
+}
+
+/* Smooth transitions for dark mode */
+body,
+header,
+footer {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Focus ring styling */
+*:focus-visible {
+  outline: 2px solid var(--color-amber-400);
+  outline-offset: 2px;
+}

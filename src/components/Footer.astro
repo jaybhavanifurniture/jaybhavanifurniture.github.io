@@ -1,0 +1,148 @@
+---
+import showroom from '../data/showroom.json';
+import { Icon } from 'astro-icon/components';
+
+const currentYear = new Date().getFullYear();
+
+const companyLinks = [
+  { text: 'About Us', href: '/about/' },
+  { text: 'Contact', href: '/contact/' },
+];
+
+const serviceLinks = [
+  { text: 'Collections', href: '/showroom/' },
+  { text: 'Architects & Designers', href: '/trade/' },
+  { text: 'Bespoke Interiors', href: '/design-build/' },
+  { text: 'Gallery', href: '/gallery/' },
+];
+---
+
+<footer class="border-t border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Brand -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <a href="/" class="flex items-center gap-2.5">
+          <img
+            src="/assets/logo.png"
+            alt="Jay Bhavani Furniture"
+            class="h-9 w-auto"
+            height="36"
+          />
+          <span class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+            Jay Bhavani <span class="text-amber-400">Furniture</span>
+          </span>
+        </a>
+        <p class="mt-3 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+          Solid wood custom carpentry in Navsari since {showroom.foundedYear}. In-house fabrication, real craftsmanship, built to last.
+        </p>
+        <div class="mt-6 flex items-center gap-4">
+          {showroom.social?.map((social) => (
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-neutral-400 hover:text-amber-500 dark:text-neutral-500 dark:hover:text-amber-400 transition-colors"
+              aria-label={`Follow us on ${social.name}`}
+            >
+              <Icon name={social.icon} class="h-5 w-5" />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-900 dark:text-neutral-100">
+          Company
+        </h3>
+        <ul class="mt-4 space-y-3">
+          {companyLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm text-neutral-600 hover:text-amber-500 dark:text-neutral-400 dark:hover:text-amber-400 transition-colors"
+              >
+                {link.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-900 dark:text-neutral-100">
+          Services
+        </h3>
+        <ul class="mt-4 space-y-3">
+          {serviceLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm text-neutral-600 hover:text-amber-500 dark:text-neutral-400 dark:hover:text-amber-400 transition-colors"
+              >
+                {link.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-900 dark:text-neutral-100">
+          Contact
+        </h3>
+        <ul class="mt-4 space-y-3">
+          <li>
+            <a
+              href={`tel:${showroom.phoneTel}`}
+              class="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-amber-500 dark:text-neutral-400 dark:hover:text-amber-400 transition-colors"
+            >
+              <Icon name="tabler:phone" class="h-4 w-4 shrink-0" />
+              {showroom.phone}
+            </a>
+          </li>
+          <li>
+            <a
+              href={showroom.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-amber-500 dark:text-neutral-400 dark:hover:text-amber-400 transition-colors"
+            >
+              <Icon name="tabler:brand-whatsapp" class="h-4 w-4 shrink-0" />
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              href={`mailto:${showroom.email}`}
+              class="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-amber-500 dark:text-neutral-400 dark:hover:text-amber-400 transition-colors"
+            >
+              <Icon name="tabler:mail" class="h-4 w-4 shrink-0" />
+              {showroom.email}
+            </a>
+          </li>
+          <li class="flex items-start gap-2 text-sm text-neutral-500 dark:text-neutral-400">
+            <Icon name="tabler:map-pin" class="mt-0.5 h-4 w-4 shrink-0" />
+            <span>{showroom.address}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hours & Bottom bar -->
+    <div class="mt-10 flex flex-col gap-4 border-t border-neutral-200 dark:border-neutral-800 pt-8 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
+        <Icon name="tabler:clock" class="h-4 w-4 shrink-0" />
+        <span>
+          {showroom.hours[0].day}: {showroom.hours[0].time}
+        </span>
+      </div>
+      <p class="text-sm text-neutral-400 dark:text-neutral-500">
+        &copy; {currentYear} {showroom.name}. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import FeatureItem from '../components/FeatureItem.astro';
+import CTASection from '../components/CTASection.astro';
+import showroom from '../data/showroom.json';
+
+const yearsInBusiness = new Date().getFullYear() - showroom.foundedYear;
+
+const metadata = {
+  title: 'About',
+  description: `Jay Bhavani Furniture has been crafting solid wood furniture in Navsari for over ${yearsInBusiness} years. Learn about our workshop, our values, and our commitment to real craftsmanship.`,
+};
+---
+
+<BaseLayout title={metadata.title} description={metadata.description}>
+  <Hero
+    title={`${yearsInBusiness} Years of Workshop<br />Craftsmanship`}
+    subtitle="A family workshop in Navsari — crafting furniture from responsibly selected timber since 1998."
+    imageSrc="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=2070&q=80"
+    imageAlt="Woodworking workshop with tools and wood shavings"
+    actions={[
+      { text: 'Visit Our Showroom', href: showroom.mapUrl, icon: 'tabler:map-pin', external: true },
+    ]}
+  />
+
+  <!-- Our Story -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-wider text-amber-500">Our Story</p>
+          <h2 class="mt-2 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl">
+            Started in 1998. Still building by hand.
+          </h2>
+          <div class="mt-6 space-y-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+            <p>
+              Jay Bhavani Furniture was founded in {showroom.foundedYear} in Navsari, Gujarat. What started as a small carpentry workshop has grown into a trusted name for bespoke furniture — but the way we work hasn't changed.
+            </p>
+            <p>
+              We design and build each item in-house, pairing traditional workshop skill with carefully chosen materials. Every piece is shaped and finished in our own workshop, with material quality and craft under our care.
+            </p>
+            <p>
+              Today, we serve homeowners looking for real wood furniture, interior designers who need a reliable fabrication partner, and families who want a complete home interior. While our workshop is proudly based in Navsari, we regularly deliver and install custom pieces across South Gujarat and Maharashtra — including Surat, Vapi, Valsad, Bilimora, Chikhli, Vyara, Ahmedabad, Vadodara, Bharuch, Ankleshwar, Silvassa, and Mumbai.
+            </p>
+          </div>
+        </div>
+        <div class="relative">
+          <img
+            src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1000&q=80"
+            alt="Carpenter working in a wood workshop"
+            class="rounded-xl shadow-lg object-cover w-full aspect-[4/3]"
+            loading="lazy"
+          />
+          <div class="absolute -bottom-4 -left-4 rounded-lg bg-amber-400 px-5 py-3 shadow-md">
+            <p class="text-2xl font-bold text-neutral-900">{yearsInBusiness}+</p>
+            <p class="text-xs font-medium text-neutral-800">Years in Business</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Workshop -->
+  <section class="bg-wood-50 py-16 dark:bg-wood-900 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-amber-500">The Workshop</p>
+        <h2 class="mt-2 text-3xl font-bold tracking-tight text-wood-900 dark:text-wood-100 sm:text-4xl">
+          In-house fabrication — our real differentiator
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-wood-800 dark:text-wood-200">
+          Our dedicated workshop spaces allow our artisans to cut, join, finish, and assemble every piece with precision. This ensures meticulous quality control, genuine customization, and the ability to craft unique items tailored to your needs.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-xl overflow-hidden shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80"
+            alt="Wood planks and timber in the workshop"
+            class="w-full h-56 object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="rounded-xl overflow-hidden shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?auto=format&fit=crop&w=800&q=80"
+            alt="Carpenter using hand tools on wood"
+            class="w-full h-56 object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="rounded-xl overflow-hidden shadow-sm sm:col-span-2 lg:col-span-1">
+          <img
+            src="https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?auto=format&fit=crop&w=800&q=80"
+            alt="Finished solid wood furniture piece"
+            class="w-full h-56 object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Values -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <p class="text-sm font-semibold uppercase tracking-wider text-amber-500">Our Values</p>
+      <h2 class="mt-2 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl">
+        What we stand for
+      </h2>
+
+      <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
+        <FeatureItem
+          icon="tabler:wood"
+          title="Sustainable Materials"
+          description="We work with responsibly selected timber and premium modern materials."
+        />
+        <FeatureItem
+          icon="tabler:hammer"
+          title="Workshop Craft"
+          description="Every joint, finish, and detail is handled in our workshop with traditional skill."
+        />
+        <FeatureItem
+          icon="tabler:heart-handshake"
+          title="Locally Rooted"
+          description="We employ local artisans and have proudly served the Navsari community for over two decades."
+        />
+        <FeatureItem
+          icon="tabler:ruler-measure"
+          title="Tailored to Your Space"
+          description="Custom dimensions, finishes, and designs to ensure your furniture perfectly suits your home."
+        />
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Come see our craftsmanship in person"
+    subtitle={`Visit us at ${showroom.address}`}
+    variant="warm"
+  />
+</BaseLayout>

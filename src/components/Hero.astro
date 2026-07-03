@@ -1,0 +1,78 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  imageSrc: string;
+  imageAlt: string;
+  actions?: Array<{
+    text: string;
+    href: string;
+    variant?: 'primary' | 'secondary';
+    icon?: string;
+    external?: boolean;
+  }>;
+  overlay?: boolean;
+}
+
+const {
+  title,
+  subtitle,
+  imageSrc,
+  imageAlt,
+  actions = [],
+  overlay = true,
+} = Astro.props;
+
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="relative overflow-hidden bg-wood-900">
+  <!-- Background image -->
+  <div class="absolute inset-0">
+    <img
+      src={imageSrc}
+      alt={imageAlt}
+      class="h-full w-full object-cover"
+      loading="eager"
+    />
+    {overlay && (
+      <div class="absolute inset-0 bg-gradient-to-r from-wood-900/85 via-wood-900/60 to-wood-900/30" />
+    )}
+  </div>
+
+  <!-- Content -->
+  <div class="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
+    <div class="max-w-2xl">
+      <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.1]">
+        <Fragment set:html={title} />
+      </h1>
+
+      {subtitle && (
+        <p class="mt-6 text-lg leading-relaxed text-neutral-300 sm:text-xl">
+          {subtitle}
+        </p>
+      )}
+
+      {actions.length > 0 && (
+        <div class="mt-8 flex flex-wrap gap-4">
+          {actions.map((action) => (
+            <a
+              href={action.href}
+              target={action.external ? '_blank' : undefined}
+              rel={action.external ? 'noopener noreferrer' : undefined}
+              class:list={[
+                'inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition-all duration-200 shadow-sm',
+                action.variant === 'secondary'
+                  ? 'bg-white/10 text-white backdrop-blur-sm border border-white/20 hover:bg-white/20'
+                  : 'bg-amber-400 text-neutral-900 hover:bg-amber-300 hover:shadow-md',
+              ]}
+            >
+              {action.icon && <Icon name={action.icon} class="h-5 w-5" />}
+              {action.text}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

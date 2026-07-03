@@ -1,0 +1,44 @@
+{
+  "name": "Jay Bhavani Furniture",
+  "shortName": "JBF",
+  "logo": "/assets/logo.png",
+  "address": "Shop no. 5, Sai complex, Sitaram nagar, Eru char rasta, Abrama Road, Navsari, Gujarat 396450",
+  "city": "Navsari",
+  "region": "Gujarat",
+  "postalCode": "396450",
+  "country": "IN",
+  "phone": "+91 98252 98696",
+  "phoneDisplay": "98252 98696",
+  "phoneTel": "+919825298696",
+  "whatsappUrl": "https://wa.me/919825298696",
+  "email": "jbf01nvs@gmail.com",
+  "foundedYear": 1998,
+  "hours": [
+    { "day": "Monday – Saturday", "time": "10:00 AM – 9:00 PM" },
+    { "day": "Sunday", "time": "11:00 AM – 7:00 PM" }
+  ],
+  "openingHours": [
+    {
+      "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "10:00",
+      "closes": "21:00"
+    },
+    {
+      "days": ["Sunday"],
+      "opens": "11:00",
+      "closes": "19:00"
+    }
+  ],
+  "mapUrl": "https://maps.app.goo.gl/WS72zQBFwpfdt2UU8",
+  "mapEmbed": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3636.1359467057464!2d72.9113964!3d20.9219483!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be0f771b14d4591%3A0x5636432d997cc6e5!2sJay%20Bhavani%20Furniture!5e1!3m2!1sen!2sin!4v1783108122683!5m2!1sen!2sin",
+  "geo": {
+    "latitude": 20.9467,
+    "longitude": 72.9506
+  },
+  "description": "Jay Bhavani Furniture — solid wood custom carpentry in Navsari since 1998. In-house fabrication, real craftsmanship, built to last.",
+  "social": [
+    { "name": "Instagram", "url": "https://www.instagram.com/jaybhavanifurniture_in/", "icon": "tabler:brand-instagram" },
+    { "name": "Facebook", "url": "https://www.facebook.com/jaybhavanifurniture.in/", "icon": "tabler:brand-facebook" },
+    { "name": "Pinterest", "url": "https://in.pinterest.com/jaybhavanifurniture/", "icon": "tabler:brand-pinterest" }
+  ]
+}

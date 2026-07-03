@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+import showroom from '../data/showroom.json';
+
+const metadata = {
+  title: 'Contact',
+  description: `Visit Jay Bhavani Furniture in Navsari or reach us via phone, email, or WhatsApp. Find our location, business hours, and directions.`,
+};
+---
+
+<BaseLayout title={metadata.title} description={metadata.description}>
+  <!-- Page Header -->
+  <section class="bg-neutral-100 py-16 dark:bg-neutral-900 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-amber-500">Contact</p>
+        <h1 class="mt-2 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl">
+          Get in touch
+        </h1>
+        <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+          We'd love to hear about your project. Visit our showroom in Navsari, call, or send a WhatsApp message. We regularly handle design-build projects and deliveries for clients across Surat, Mumbai, and the wider Gujarat/Maharashtra region.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Cards -->
+  <section class="py-12 sm:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <!-- Phone -->
+        <a
+          href={`tel:${showroom.phoneTel}`}
+          class="group flex items-start gap-4 rounded-xl border border-neutral-200 bg-white p-6 transition-all duration-200 hover:border-amber-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-500/50"
+        >
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-500 dark:bg-amber-500/10">
+            <Icon name="tabler:phone" class="h-6 w-6" />
+          </div>
+          <div>
+            <h2 class="text-base font-semibold text-neutral-900 dark:text-neutral-100">Phone</h2>
+            <p class="mt-1 text-lg font-medium text-amber-500">{showroom.phone}</p>
+          </div>
+        </a>
+
+        <!-- WhatsApp -->
+        <a
+          href={showroom.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex items-start gap-4 rounded-xl border border-neutral-200 bg-white p-6 transition-all duration-200 hover:border-green-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-green-500/50"
+        >
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-green-50 text-green-600 dark:bg-green-500/10">
+            <Icon name="tabler:brand-whatsapp" class="h-6 w-6" />
+          </div>
+          <div>
+            <h2 class="text-base font-semibold text-neutral-900 dark:text-neutral-100">WhatsApp</h2>
+            <p class="mt-1 text-lg font-medium text-green-600">Chat with us</p>
+          </div>
+        </a>
+
+        <!-- Email -->
+        <a
+          href={`mailto:${showroom.email}`}
+          class="group flex items-start gap-4 rounded-xl border border-neutral-200 bg-white p-6 transition-all duration-200 hover:border-amber-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-500/50"
+        >
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-500 dark:bg-amber-500/10">
+            <Icon name="tabler:mail" class="h-6 w-6" />
+          </div>
+          <div>
+            <h2 class="text-base font-semibold text-neutral-900 dark:text-neutral-100">Email</h2>
+            <p class="mt-1 text-base text-amber-500">{showroom.email}</p>
+          </div>
+        </a>
+
+        <!-- Address -->
+        <a
+          href={showroom.mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex items-start gap-4 rounded-xl border border-neutral-200 bg-white p-6 transition-all duration-200 hover:border-amber-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-500/50"
+        >
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-500 dark:bg-amber-500/10">
+            <Icon name="tabler:map-pin" class="h-6 w-6" />
+          </div>
+          <div>
+            <h2 class="text-base font-semibold text-neutral-900 dark:text-neutral-100">Address</h2>
+            <p class="mt-1 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+              {showroom.address}
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Hours -->
+  <section class="py-12 sm:py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+        Business Hours
+      </h2>
+      <div class="mt-8 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800">
+        {showroom.hours.map((slot, i) => (
+          <div
+            class:list={[
+              'flex items-center justify-between px-6 py-4',
+              i % 2 === 0
+                ? 'bg-white dark:bg-neutral-900'
+                : 'bg-neutral-50 dark:bg-neutral-900/50',
+            ]}
+          >
+            <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              {slot.day}
+            </span>
+            <span class="text-sm font-semibold text-amber-500">
+              {slot.time}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section class="pb-16 sm:pb-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+        Find Us
+      </h2>
+      <div class="mt-8 overflow-hidden rounded-xl border border-neutral-200 shadow-sm dark:border-neutral-800">
+        <iframe
+          src={showroom.mapEmbed}
+          width="100%"
+          height="400"
+          style="border:0;"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Jay Bhavani Furniture location on Google Maps"
+        ></iframe>
+      </div>
+      <div class="mt-6 text-center">
+        <a
+          href={showroom.mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-6 py-3 text-base font-semibold text-neutral-900 shadow-sm transition-all duration-200 hover:bg-amber-300 hover:shadow-md"
+        >
+          <Icon name="tabler:map-pin" class="h-5 w-5" />
+          Get Directions
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

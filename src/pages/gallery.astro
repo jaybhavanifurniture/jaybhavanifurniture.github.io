@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import CTASection from "../components/CTASection.astro";
+import showroom from "../data/showroom.json";
+
+const metadata = {
+  title: "Gallery",
+  description:
+    "Explore the craftsmanship and bespoke furniture built by Jay Bhavani Furniture in Navsari. See our latest projects on Pinterest.",
+};
+---
+
+<BaseLayout title={metadata.title} description={metadata.description}>
+  <Hero
+    title="Our Craftsmanship"
+    subtitle="A curated selection of our finest bespoke furniture and custom interiors, updated directly from our workshop."
+    imageSrc="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=2070&q=80"
+    imageAlt="Carpenter's workshop with wood shavings and tools"
+  />
+
+  <section class="py-16 sm:py-20 bg-white dark:bg-neutral-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <p
+          class="text-sm font-semibold uppercase tracking-wider text-amber-500"
+        >
+          Portfolio
+        </p>
+        <h2
+          class="mt-2 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl"
+        >
+          Our recent work
+        </h2>
+        <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">
+          Explore a curated collection of our latest bespoke furniture and interior projects. 
+          Follow us on Pinterest for more inspiration.
+        </p>
+      </div>
+
+      <!-- Pinterest Embed -->
+      <div class="flex justify-center">
+        <!-- Note: Replace the href below with your actual Pinterest Board URL -->
+        <a
+          data-pin-do="embedUser"
+          data-pin-board-width="1000"
+          data-pin-scale-height="320"
+          data-pin-scale-width="115"
+          href="https://in.pinterest.com/jaybhavanifurniture/"></a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="See something you like?"
+    subtitle="Send us a photo or sketch of your idea, and we'll build it to perfection."
+  />
+
+  <!-- Pinterest Widget Script -->
+  <script is:inline async defer src="//assets.pinterest.com/js/pinit.js"
+  ></script>
+</BaseLayout>

@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ProcessStep from '../components/ProcessStep.astro';
+import CTASection from '../components/CTASection.astro';
+import showroom from '../data/showroom.json';
+
+const metadata = {
+  title: 'Bespoke Interiors',
+  description: 'Complete home interiors. From expert design to guaranteed quality fabrication, JBF handles your entire interior project seamlessly.',
+};
+---
+
+<BaseLayout title={metadata.title} description={metadata.description}>
+  <Hero
+    title="Complete Interiors.<br />Expert Design & Build."
+    subtitle="From visionary concept to flawless execution, we provide a complete, seamless home interior experience."
+    imageSrc="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2070&q=80"
+    imageAlt="Beautifully designed modern living room with solid wood furniture"
+    actions={[
+      { text: 'Start a Project', href: showroom.whatsappUrl, icon: 'tabler:brand-whatsapp', external: true },
+    ]}
+  />
+
+  <!-- Our Approach -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-sm font-semibold uppercase tracking-wider text-amber-500">Our Approach</p>
+        <h2 class="mt-2 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl">
+          Visionary design, flawless execution
+        </h2>
+        <p class="mt-4 text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
+          A truly remarkable interior requires both aesthetic vision and uncompromising craftsmanship.
+        </p>
+        <p class="mt-4 text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
+          <strong>We manage the entire process.</strong> When you want a full home interior, we handle everything from spatial planning and material selection to the final, complex fabrication. You get a single, unified team dedicated to bringing your home to life.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="bg-neutral-100 py-16 dark:bg-neutral-900 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl">
+            How the process works
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+            For you, the homeowner, it's seamless. You get a single point of contact, a unified vision, and the assurance that the design you approve can and will be built perfectly.
+          </p>
+        </div>
+
+        <div class="space-y-2 pl-4 sm:pl-0">
+          <ProcessStep
+            step={1}
+            title="Initial Consultation"
+            description="We meet to understand your lifestyle, requirements, budget, and aesthetic vision. This forms the foundation of your custom home."
+          />
+          <ProcessStep
+            step={2}
+            title="Design & Planning"
+            description="We work with you on layouts, material boards, and 3D renders. Every design decision is made with a deep understanding of fabrication, ensuring what you see is exactly what can be built."
+          />
+          <ProcessStep
+            step={3}
+            title="Fabrication"
+            description="Once you approve the designs, production begins in our Navsari workshop. We build your kitchens, wardrobes, and statement furniture to our exacting quality standards."
+          />
+          <ProcessStep
+            step={4}
+            title="Installation"
+            description="Our team installs the finished pieces on-site, managing every detail to ensure the final result matches the initial vision perfectly."
+            isLast={true}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection 
+    title="Ready to furnish your entire home?"
+    subtitle="Let's chat about your requirements and start bringing your vision to life."
+  />
+</BaseLayout>
