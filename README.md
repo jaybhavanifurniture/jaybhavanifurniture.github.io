@@ -56,3 +56,4 @@ If business hours, phone numbers, or social media links change, you do not need 
 This site is automatically deployed to GitHub Pages using GitHub Actions. 
 
 Any time a commit is pushed to the `main` branch, the `.github/workflows/deploy.yml` action will trigger, build the static Astro files, and publish them to the live website within 1-2 minutes.
+ 
