@@ -25,7 +25,8 @@ const currentYear = new Date().getFullYear();
 const yearsInBusiness = currentYear - showroom.foundedYear;
 
 // JSON-LD structured data
-const jsonLd = {
+const jsonLd = [
+  {
   '@context': 'https://schema.org',
   '@type': ['FurnitureStore', 'ProfessionalService'],
   name: showroom.name,
@@ -69,7 +70,14 @@ const jsonLd = {
     { '@type': 'State', name: 'Gujarat' },
     { '@type': 'State', name: 'Maharashtra' }
   ],
-};
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Jay Bhavani Furniture',
+    url: Astro.site?.toString()
+  }
+];
 ---
 
 <!doctype html>
