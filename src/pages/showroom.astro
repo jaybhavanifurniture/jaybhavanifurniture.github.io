@@ -6,7 +6,7 @@ import CTASection from '../components/CTASection.astro';
 import showroom from '../data/showroom.json';
 
 const metadata = {
-  title: 'Collections',
+  title: 'Solid Wood Collections',
   description: 'Premium furniture built in Navsari — living room, bedroom, dining, and office furniture crafted from sustainable materials in our in-house workshop.',
 };
 
@@ -14,7 +14,7 @@ const categories = [
   {
     name: 'Living Room',
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80',
-    description: 'Sofas, coffee tables, TV units, and display shelves — all solid wood.',
+    description: 'Coffee tables and TV units in solid timber; sofa frames built on quality engineered cores for lasting shape and comfort.',
   },
   {
     name: 'Bedroom',
@@ -34,15 +34,15 @@ const categories = [
   {
     name: 'Custom Pieces',
     image: 'https://images.unsplash.com/photo-1588854337236-6889d631faa8?auto=format&fit=crop&w=800&q=80',
-    description: 'Anything you need, built to your specs — if it can be made from solid wood, we can build it.',
+    description: 'Anything you need, built to your specs — using the right material for the piece.',
   },
 ];
 ---
 
 <BaseLayout title={metadata.title} description={metadata.description}>
   <Hero
-    title="Premium Furniture,<br />Crafted in Navsari"
-    subtitle="Every piece is built from responsibly sourced materials in our own workshop — by carpenters who've been doing this for decades."
+    title="Solid Wood Collections"
+    subtitle="Ready-to-order and customizable furniture from our workshop — for your home."
     imageSrc="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=2070&q=80"
     imageAlt="Solid wood furniture showroom"
     actions={[
