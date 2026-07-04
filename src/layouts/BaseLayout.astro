@@ -1,8 +1,8 @@
 ---
-import '../styles/global.css';
-import showroom from '../data/showroom.json';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import "../styles/global.css";
+import showroom from "../data/showroom.json";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
   title: string;
@@ -13,13 +13,14 @@ interface Props {
 const {
   title,
   description = showroom.description,
-  ogImage = '/assets/logo.png',
+  ogImage = "/assets/logo.png",
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = title === 'Home'
-  ? `Jay Bhavani Furniture — Premium Custom Furniture in Navsari, Surat & Gujarat`
-  : `${title} — Jay Bhavani Furniture`;
+const fullTitle =
+  title === "Home"
+    ? `Jay Bhavani Furniture — Premium Custom Furniture in Navsari, Surat & Gujarat`
+    : `${title} — Jay Bhavani Furniture`;
 
 const currentYear = new Date().getFullYear();
 const yearsInBusiness = currentYear - showroom.foundedYear;
@@ -27,56 +28,58 @@ const yearsInBusiness = currentYear - showroom.foundedYear;
 // JSON-LD structured data
 const jsonLd = [
   {
-  '@context': 'https://schema.org',
-  '@type': ['FurnitureStore', 'ProfessionalService'],
-  name: showroom.name,
-  description: showroom.description,
-  url: Astro.site?.toString(),
-  telephone: showroom.phoneTel,
-  email: showroom.email,
-  foundingDate: String(showroom.foundedYear),
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: showroom.address,
-    addressLocality: showroom.city,
-    addressRegion: showroom.region,
-    postalCode: showroom.postalCode,
-    addressCountry: showroom.country,
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: showroom.geo.latitude,
-    longitude: showroom.geo.longitude,
-  },
-  openingHoursSpecification: showroom.openingHours.map((slot) => ({
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: slot.days,
-    opens: slot.opens,
-    closes: slot.closes,
-  })),
-  areaServed: [
-    { '@type': 'City', name: 'Navsari' },
-    { '@type': 'City', name: 'Surat' },
-    { '@type': 'City', name: 'Valsad' },
-    { '@type': 'City', name: 'Vapi' },
-    { '@type': 'City', name: 'Bilimora' },
-    { '@type': 'City', name: 'Chikhli' },
-    { '@type': 'City', name: 'Vyara' },
-    { '@type': 'City', name: 'Ahmedabad' },
-    { '@type': 'City', name: 'Vadodara' },
-    { '@type': 'City', name: 'Bharuch' },
-    { '@type': 'City', name: 'Ankleshwar' },
-    { '@type': 'City', name: 'Silvassa' },
-    { '@type': 'State', name: 'Gujarat' },
-    { '@type': 'State', name: 'Maharashtra' }
-  ],
+    "@context": "https://schema.org",
+    "@type": ["FurnitureStore", "ProfessionalService"],
+    name: showroom.name,
+    description: showroom.description,
+    url: Astro.site?.toString(),
+    telephone: showroom.phoneTel,
+    email: showroom.email,
+    foundingDate: String(showroom.foundedYear),
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: showroom.address,
+      addressLocality: showroom.city,
+      addressRegion: showroom.region,
+      postalCode: showroom.postalCode,
+      addressCountry: showroom.country,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: showroom.geo.latitude,
+      longitude: showroom.geo.longitude,
+    },
+    openingHoursSpecification: showroom.openingHours.map((slot) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: slot.days,
+      opens: slot.opens,
+      closes: slot.closes,
+    })),
+    areaServed: [
+      { "@type": "City", name: "Navsari" },
+      { "@type": "City", name: "Surat" },
+      { "@type": "City", name: "Valsad" },
+      { "@type": "City", name: "Vapi" },
+      { "@type": "City", name: "Bilimora" },
+      { "@type": "City", name: "Chikhli" },
+      { "@type": "City", name: "Vyara" },
+      { "@type": "City", name: "Ahmedabad" },
+      { "@type": "City", name: "Vadodara" },
+      { "@type": "City", name: "Bharuch" },
+      { "@type": "City", name: "Ankleshwar" },
+      { "@type": "City", name: "Silvassa" },
+      { "@type": "State", name: "Gujarat" },
+      { "@type": "State", name: "Maharashtra" },
+    ],
   },
   {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Jay Bhavani Furniture',
-    url: Astro.site?.toString()
-  }
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Jay Bhavani Furniture",
+    alternateName: ["JBF", "Jay Bhavani"],
+    description: showroom.description,
+    url: Astro.site?.toString(),
+  },
 ];
 ---
 
@@ -91,7 +94,10 @@ const jsonLd = [
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="robots" content="index, follow" />
-    <meta name="google-site-verification" content="_kIw5pcOdFq8zh14joaU3TguZ62SNhfO49KSkRuawSs" />
+    <meta
+      name="google-site-verification"
+      content="_kIw5pcOdFq8zh14joaU3TguZ62SNhfO49KSkRuawSs"
+    />
 
     <!-- Open Graph -->
     <meta property="og:title" content={fullTitle} />
@@ -116,9 +122,9 @@ const jsonLd = [
     <!-- Dark mode: prevent flash -->
     <script is:inline>
       (function () {
-        const theme = localStorage.getItem('theme');
-        if (theme === 'dark') {
-          document.documentElement.classList.add('dark');
+        const theme = localStorage.getItem("theme");
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
         }
       })();
     </script>
@@ -128,7 +134,9 @@ const jsonLd = [
 
     <meta name="generator" content={Astro.generator} />
   </head>
-  <body class="min-h-screen flex flex-col bg-neutral-50 text-neutral-800 dark:bg-neutral-950 dark:text-neutral-200 antialiased">
+  <body
+    class="min-h-screen flex flex-col bg-neutral-50 text-neutral-800 dark:bg-neutral-950 dark:text-neutral-200 antialiased"
+  >
     <Header />
     <main class="flex-1">
       <slot />
