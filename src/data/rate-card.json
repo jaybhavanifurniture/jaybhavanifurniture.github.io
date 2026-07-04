@@ -1,0 +1,97 @@
+{
+  "baseRatePerSqft": {
+    "economy": 120,
+    "standard": 180,
+    "premium": 260
+  },
+  "homeTypeDefaults": {
+    "1bhk": { "label": "1 BHK", "avgAreaSqft": 650 },
+    "2bhk": { "label": "2 BHK", "avgAreaSqft": 950 },
+    "3bhk": { "label": "3 BHK", "avgAreaSqft": 1350 },
+    "4bhk_villa": { "label": "4+ BHK / Villa", "avgAreaSqft": 2000 }
+  },
+  "cityMultipliers": {
+    "navsari": { "label": "Navsari", "multiplier": 1.00, "region": "gujarat" },
+    "surat": { "label": "Surat", "multiplier": 1.10, "region": "gujarat" },
+    "valsad": { "label": "Valsad", "multiplier": 1.00, "region": "gujarat" },
+    "vapi": { "label": "Vapi", "multiplier": 1.00, "region": "gujarat" },
+    "bharuch": { "label": "Bharuch", "multiplier": 1.05, "region": "gujarat" },
+    "ahmedabad": { "label": "Ahmedabad", "multiplier": 1.15, "region": "gujarat" },
+    "vadodara": { "label": "Vadodara", "multiplier": 1.10, "region": "gujarat" },
+    "rajkot": { "label": "Rajkot", "multiplier": 1.05, "region": "gujarat" },
+    "bangalore": { "label": "Bangalore", "multiplier": 1.15, "region": "national" },
+    "mumbai": { "label": "Mumbai", "multiplier": 1.30, "region": "national" },
+    "hyderabad": { "label": "Hyderabad", "multiplier": 1.05, "region": "national" },
+    "chennai": { "label": "Chennai", "multiplier": 1.05, "region": "national" },
+    "pune": { "label": "Pune", "multiplier": 1.10, "region": "national" },
+    "other": { "label": "Other", "multiplier": 1.00, "region": "other" }
+  },
+  "roomAddOns": {
+    "modular_kitchen": {
+      "label": "Modular Kitchen",
+      "icon": "kitchen",
+      "economy": 150000,
+      "standard": 250000,
+      "premium": 400000
+    },
+    "wardrobes": {
+      "label": "Wardrobes",
+      "icon": "wardrobe",
+      "economy": 60000,
+      "standard": 100000,
+      "premium": 180000
+    },
+    "false_ceiling": {
+      "label": "False Ceiling",
+      "icon": "ceiling",
+      "economy": 25000,
+      "standard": 45000,
+      "premium": 80000
+    },
+    "living_room": {
+      "label": "Living Room",
+      "icon": "living",
+      "economy": 40000,
+      "standard": 80000,
+      "premium": 150000
+    },
+    "tv_unit": {
+      "label": "TV Unit",
+      "icon": "tv",
+      "economy": 20000,
+      "standard": 35000,
+      "premium": 60000
+    },
+    "lighting": {
+      "label": "Lighting",
+      "icon": "lighting",
+      "economy": 15000,
+      "standard": 30000,
+      "premium": 55000
+    }
+  },
+  "estimateRangeSpread": 0.12,
+  "exclusions": [
+    "Civil work or structural changes",
+    "Kitchen appliances",
+    "Loose furniture (sofas, beds, dining tables)",
+    "Permits or local approvals"
+  ],
+  "packages": {
+    "economy": {
+      "label": "Economy",
+      "description": "Functional finishes, reliable materials",
+      "icon": "leaf"
+    },
+    "standard": {
+      "label": "Standard",
+      "description": "Balanced quality, refined finishes",
+      "icon": "star"
+    },
+    "premium": {
+      "label": "Premium",
+      "description": "Top-tier materials, luxury detailing",
+      "icon": "diamond"
+    }
+  }
+}

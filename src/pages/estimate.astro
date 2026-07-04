@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CostCalculator from '../components/calculator/CostCalculator';
+
+const metadata = {
+  title: 'Get an Estimate',
+  description:
+    'Get an instant interior design cost estimate for your home. Pick your home type, city, area, and finish — see the price immediately. No signup required.',
+};
+---
+
+<BaseLayout title={metadata.title} description={metadata.description}>
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-wood-50 to-neutral-50 pb-32 pt-12 dark:from-wood-950 dark:to-neutral-950 sm:pb-40 sm:pt-16">
+    <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+      <p class="text-sm font-semibold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+        Interior Design Cost Calculator
+      </p>
+      <h1
+        class="mt-2 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl flex items-center justify-center flex-wrap gap-3"
+      >
+        Get an instant estimate for your home
+        <span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold uppercase tracking-widest text-amber-700 dark:bg-amber-900/50 dark:text-amber-400">
+          Beta
+        </span>
+      </h1>
+      <p
+        class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400"
+      >
+        Adjust the inputs below to see a live cost range. <strong>Please note:</strong> This tool is currently in beta and the estimates could be inaccurate. A designer will always confirm exact pricing after reviewing your space.
+      </p>
+    </div>
+  </section>
+
+  <!-- Calculator Island -->
+  <section class="relative -mt-24 pb-16 sm:-mt-32 sm:pb-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="overflow-hidden rounded-3xl bg-white shadow-xl shadow-neutral-200/50 ring-1 ring-neutral-200 dark:bg-neutral-900 dark:shadow-neutral-900/50 dark:ring-neutral-800">
+        <CostCalculator client:load />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

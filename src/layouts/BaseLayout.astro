@@ -119,16 +119,6 @@ const jsonLd = [
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-    <!-- Dark mode: prevent flash -->
-    <script is:inline>
-      (function () {
-        const theme = localStorage.getItem("theme");
-        if (theme === "dark") {
-          document.documentElement.classList.add("dark");
-        }
-      })();
-    </script>
-
     <!-- Sitemap -->
     <link rel="sitemap" href="/sitemap-index.xml" />
 
