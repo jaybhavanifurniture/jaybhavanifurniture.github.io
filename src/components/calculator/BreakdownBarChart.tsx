@@ -18,7 +18,7 @@ export function BreakdownBarChart({
 
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+      <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
         Cost Breakdown
       </h3>
 
@@ -57,7 +57,7 @@ export function BreakdownBarChart({
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+      <div className="flex flex-wrap justify-between gap-x-4 gap-y-2 mt-4">
         {breakdown.map((item) => (
           <div key={item.key} className="flex items-center gap-1.5">
             <span

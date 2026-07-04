@@ -20,10 +20,10 @@ export function SegmentedControl<T extends string>({
   label,
 }: SegmentedControlProps<T>) {
   return (
-    <fieldset className="space-y-2">
-      <legend className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+    <div className="space-y-3">
+      <span className="block text-sm font-semibold text-neutral-900 dark:text-neutral-100">
         {label}
-      </legend>
+      </span>
       <div className="flex w-full rounded-xl bg-neutral-100 p-1 dark:bg-neutral-800/80">
         {options.map((opt) => {
           const isActive = opt.value === value;
@@ -49,6 +49,6 @@ export function SegmentedControl<T extends string>({
           );
         })}
       </div>
-    </fieldset>
+    </div>
   );
 }

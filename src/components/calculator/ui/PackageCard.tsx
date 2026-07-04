@@ -68,11 +68,11 @@ export function PackageCard({
       {/* Icon */}
       <span
         className={`
-          transition-colors duration-200
+          flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110
           ${
             active
-              ? 'text-amber-500 dark:text-amber-400'
-              : 'text-neutral-400 group-hover:text-neutral-500 dark:text-neutral-500'
+              ? 'bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400'
+              : 'bg-neutral-100 text-neutral-400 group-hover:bg-neutral-200 group-hover:text-neutral-600 dark:bg-neutral-800 dark:text-neutral-500'
           }
         `}
       >

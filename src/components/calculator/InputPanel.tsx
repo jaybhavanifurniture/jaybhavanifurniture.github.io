@@ -77,45 +77,52 @@ export function InputPanel({ state, dispatch, rateCard }: InputPanelProps) {
       />
 
       {/* City */}
-      <div className="space-y-2">
+      <div className="space-y-3">
         <label
           htmlFor="city-select"
-          className="text-sm font-medium text-neutral-600 dark:text-neutral-400"
+          className="block text-sm font-semibold text-neutral-900 dark:text-neutral-100"
         >
           City
         </label>
-        <select
-          id="city-select"
-          value={state.city}
-          onChange={(e) =>
-            dispatch({ type: 'SET_CITY', payload: e.target.value })
-          }
-          className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm font-medium text-neutral-900 shadow-sm transition-colors focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100"
-        >
-          <optgroup label="Gujarat">
-            {gujaratCities.map((city) => (
-              <option key={city.value} value={city.value}>
-                {city.label}
-              </option>
-            ))}
-          </optgroup>
-          <optgroup label="National">
-            {nationalCities.map((city) => (
-              <option key={city.value} value={city.value}>
-                {city.label}
-              </option>
-            ))}
-          </optgroup>
-          {otherCities.length > 0 && (
-            <optgroup label="Other">
-              {otherCities.map((city) => (
+        <div className="relative">
+          <select
+            id="city-select"
+            value={state.city}
+            onChange={(e) =>
+              dispatch({ type: 'SET_CITY', payload: e.target.value })
+            }
+            className="w-full appearance-none rounded-xl border border-neutral-200 bg-white px-4 py-3 pr-10 text-sm font-medium text-neutral-900 shadow-sm transition-colors focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100"
+          >
+            <optgroup label="Gujarat">
+              {gujaratCities.map((city) => (
                 <option key={city.value} value={city.value}>
                   {city.label}
                 </option>
               ))}
             </optgroup>
-          )}
-        </select>
+            <optgroup label="National">
+              {nationalCities.map((city) => (
+                <option key={city.value} value={city.value}>
+                  {city.label}
+                </option>
+              ))}
+            </optgroup>
+            {otherCities.length > 0 && (
+              <optgroup label="Other">
+                {otherCities.map((city) => (
+                  <option key={city.value} value={city.value}>
+                    {city.label}
+                  </option>
+                ))}
+              </optgroup>
+            )}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-neutral-400 dark:text-neutral-500">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </div>
+        </div>
       </div>
 
       {/* Carpet Area */}
@@ -131,7 +138,7 @@ export function InputPanel({ state, dispatch, rateCard }: InputPanelProps) {
 
       {/* Package Tier */}
       <div className="space-y-3">
-        <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+        <span className="block text-sm font-semibold text-neutral-900 dark:text-neutral-100">
           Package Tier
         </span>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -151,7 +158,7 @@ export function InputPanel({ state, dispatch, rateCard }: InputPanelProps) {
 
       {/* Room Scope */}
       <div className="space-y-3">
-        <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+        <span className="block text-sm font-semibold text-neutral-900 dark:text-neutral-100">
           Rooms & Scope
         </span>
         <div className="flex flex-wrap gap-2">
