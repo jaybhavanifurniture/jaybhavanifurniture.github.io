@@ -32,12 +32,34 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": ["FurnitureStore", "ProfessionalService"],
+    "@id": Astro.site ? `${Astro.site.toString()}#organization` : undefined,
     name: showroom.name,
+    alternateName: showroom.shortName,
     description: showroom.description,
     url: Astro.site?.toString(),
+    logo: new URL(showroom.logo, Astro.site).toString(),
+    image: new URL(ogImage, Astro.site).toString(),
     telephone: showroom.phoneTel,
     email: showroom.email,
     foundingDate: String(showroom.foundedYear),
+    priceRange: "₹₹₹",
+    paymentAccepted: "Cash, Credit Card, UPI, Bank Transfer",
+    currenciesAccepted: "INR",
+    hasMap: showroom.mapUrl,
+    sameAs: [
+      ...showroom.social.map((s) => s.url),
+      showroom.whatsappUrl,
+    ],
+    knowsAbout: [
+      "Custom Furniture",
+      "Modular Kitchens",
+      "Wardrobes",
+      "Living Room Furniture",
+      "Bedroom Furniture",
+      "Office Furniture",
+      "Interior Design",
+      "Bespoke Interiors",
+    ],
     address: {
       "@type": "PostalAddress",
       streetAddress: showroom.address,
@@ -77,10 +99,15 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Jay Bhavani Furniture",
-    alternateName: ["JBF", "Jay Bhavani"],
+    "@id": Astro.site ? `${Astro.site.toString()}#website` : undefined,
+    name: showroom.name,
+    alternateName: [showroom.shortName, "Jay Bhavani"],
     description: showroom.description,
     url: Astro.site?.toString(),
+    inLanguage: "en-IN",
+    publisher: Astro.site
+      ? { "@id": `${Astro.site.toString()}#organization` }
+      : undefined,
   },
 ];
 ---
