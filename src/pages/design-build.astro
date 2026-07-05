@@ -6,12 +6,13 @@ import CTASection from '../components/CTASection.astro';
 import showroom from '../data/showroom.json';
 
 const metadata = {
-  title: 'Bespoke Interiors — Design to Installation',
-  description: 'Complete home interiors. From expert design to guaranteed quality fabrication, JBF handles your entire interior project seamlessly.',
+  title: 'Bespoke Interiors',
+  description: `Complete, bespoke interior execution by Jay Bhavani Furniture. Serving Navsari, Surat, and Valsad with unified workshop control and installation.`,
+  ogImage: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2070&q=80"
 };
 ---
 
-<BaseLayout title={metadata.title} description={metadata.description}>
+<BaseLayout title={metadata.title} description={metadata.description} ogImage={metadata.ogImage}>
   <Hero
     title="Bespoke Interiors —<br />Design to Installation"
     subtitle="Complete interior design and build, delivered with our design partners — one project, two specialists."

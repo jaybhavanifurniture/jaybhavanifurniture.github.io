@@ -24,14 +24,16 @@ const {
 } = Astro.props;
 
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 ---
 
 <section class="relative overflow-hidden bg-wood-900">
   <!-- Background image -->
   <div class="absolute inset-0">
-    <img
+    <Image
       src={imageSrc}
       alt={imageAlt}
+      inferSize={true}
       class="h-full w-full object-cover"
       loading="eager"
     />

@@ -8,6 +8,10 @@ export default defineConfig({
   site: 'https://jaybhavanifurniture.github.io',
   output: 'static',
 
+  image: {
+    domains: ['images.unsplash.com'],
+  },
+
   integrations: [
     sitemap(),
     react(),

@@ -1,0 +1,17 @@
+{
+  "name": "Jay Bhavani Furniture",
+  "short_name": "JBF",
+  "description": "Premium Custom Furniture in Navsari, Surat & Gujarat",
+  "icons": [
+    {
+      "src": "/assets/logo.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#f59e0b",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}

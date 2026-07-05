@@ -5,12 +5,13 @@ import ProcessStep from '../components/ProcessStep.astro';
 import showroom from '../data/showroom.json';
 
 const metadata = {
-  title: 'Your Fabrication Partner',
-  description: 'JBF is the reliable fabrication partner for interior designers and architects in Navsari. We build custom furniture to your exact specifications.',
+  title: 'Architects & Designers',
+  description: `Jay Bhavani Furniture partners with architects and interior designers in Navsari and Surat to build high-end custom furniture and execute bespoke interiors.`,
+  ogImage: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=2070&q=80"
 };
 ---
 
-<BaseLayout title={metadata.title} description={metadata.description}>
+<BaseLayout title={metadata.title} description={metadata.description} ogImage={metadata.ogImage}>
   <Hero
     title="Your Fabrication Partner"
     subtitle="When a project needs a real statement piece — a custom table, elegant doors, or a feature unit — that's us. We build to your exact specifications."

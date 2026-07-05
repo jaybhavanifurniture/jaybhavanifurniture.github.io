@@ -8,6 +8,7 @@ import showroom from '../data/showroom.json';
 const metadata = {
   title: 'Solid Wood Collections',
   description: 'Premium furniture built in Navsari — living room, bedroom, dining, and office furniture crafted from sustainable materials in our in-house workshop.',
+  ogImage: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=2070&q=80',
 };
 
 const categories = [
@@ -39,7 +40,7 @@ const categories = [
 ];
 ---
 
-<BaseLayout title={metadata.title} description={metadata.description}>
+<BaseLayout title={metadata.title} description={metadata.description} ogImage={metadata.ogImage}>
   <Hero
     title="Solid Wood Collections"
     subtitle="Ready-to-order and customizable furniture from our workshop — for your home."

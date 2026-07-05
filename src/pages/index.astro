@@ -4,9 +4,15 @@ import Hero from '../components/Hero.astro';
 import OfferingCard from '../components/OfferingCard.astro';
 import CTASection from '../components/CTASection.astro';
 import showroom from '../data/showroom.json';
+
+const metadata = {
+  title: "Home",
+  description: showroom.description,
+  ogImage: "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?auto=format&fit=crop&w=2070&q=80"
+};
 ---
 
-<BaseLayout title="Home">
+<BaseLayout title={metadata.title} description={metadata.description} ogImage={metadata.ogImage}>
   <Hero
     title="Made in Navsari with thoughtful craft<br />and durable materials."
     subtitle="Furniture built in Navsari from the material that's right for the piece — solid teak and sheesham where it counts, quality cores where it matters."

@@ -1,6 +1,7 @@
 ---
 import promos from '../data/promo.json';
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 
 let currentPromo = promos.find((p) => {
   if (!p.isActive || p.campaignType === 'evergreen') return false;
@@ -42,9 +43,10 @@ const { id, imageSrc, imageAlt, href, delayMs, endDate, badgeText, title, discou
     <!-- Promotional Content -->
     <!-- Promotional Content -->
     <div class="block overflow-hidden rounded-2xl bg-white dark:bg-neutral-900 border-4 border-white dark:border-neutral-800 shadow-xl flex flex-col relative">
-      <img
+      <Image
         src={imageSrc}
         alt={imageAlt}
+        inferSize={true}
         class="w-full aspect-video object-cover"
         loading="lazy"
         decoding="async"
