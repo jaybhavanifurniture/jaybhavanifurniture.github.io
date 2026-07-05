@@ -25,15 +25,15 @@ const { title, href, discountText, endDate } = currentPromo;
 <a 
   id="announcement-bar"
   href={href}
-  class="group relative block bg-amber-500 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-amber-600 transition-colors sm:px-6 lg:px-8"
+  class="group relative block bg-amber-500 px-3 py-2 sm:py-2.5 text-center text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-amber-600 transition-colors sm:px-6 lg:px-8"
 >
-  <div class="mx-auto flex max-w-7xl items-center justify-center gap-2">
-    <Icon name="tabler:tag" class="h-4.5 w-4.5 shrink-0" />
-    <span class="flex-1 text-center sm:flex-none flex items-center justify-center flex-wrap gap-2">
-      <span>{title}</span>
-      {discountText && <span class="font-bold bg-white/20 px-2 py-0.5 rounded text-xs">{discountText}</span>}
+  <div class="mx-auto flex max-w-7xl items-center justify-center gap-1.5 sm:gap-2">
+    <Icon name="tabler:tag" class="h-4 w-4 sm:h-4.5 sm:w-4.5 shrink-0" />
+    <span class="flex-1 text-center sm:flex-none flex items-center justify-center gap-1.5 sm:gap-2 overflow-hidden whitespace-nowrap">
+      <span class={discountText ? "hidden sm:inline truncate" : "truncate"}>{title}</span>
+      {discountText && <span class="font-bold bg-white/20 px-1.5 py-0.5 sm:px-2 rounded text-[10px] sm:text-xs truncate shrink-0">{discountText}</span>}
     </span>
-    <Icon name="tabler:arrow-right" class="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+    <Icon name="tabler:arrow-right" class="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
   </div>
 </a>
 
