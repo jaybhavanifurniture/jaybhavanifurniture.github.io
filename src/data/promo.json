@@ -51,7 +51,7 @@
     "title": "Elevate Your Living Space",
     "discountText": "Complimentary Design Consultation",
     "subtitle": "Experience the finest craftsmanship with our premium bespoke furniture. Connect with our experts today to design the home of your dreams.",
-    "imageSrc": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=800&auto=format&fit=crop",
+    "imageSrc": "/images/evergreen_promo.webp",
     "imageAlt": "Premium Living Room Design",
     "href": "/offer/",
     "delayMs": 4000,
