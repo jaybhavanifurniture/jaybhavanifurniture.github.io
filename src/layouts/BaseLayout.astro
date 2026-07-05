@@ -161,10 +161,10 @@ const jsonLd = [
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${showroom.googleAnalyticsId}`}></script>
         <script is:inline define:vars={{ gaId: showroom.googleAnalyticsId }}>
           window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);} 
-          gtag('js', new Date());
+          window.gtag = function gtag(){window.dataLayer.push(arguments);};
+          window.gtag('js', new Date());
           // disable automatic pageview so SPA navigation can control pageviews if needed
-          gtag('config', gaId, { send_page_view: false });
+          window.gtag('config', gaId, { send_page_view: false });
         </script>
       </>
     )}
@@ -206,9 +206,13 @@ const jsonLd = [
             try { window.gtag('event', name, props || {}); } catch (e) {}
             return;
           }
-          if (import.meta.env && import.meta.env.DEV) {
-            console.debug('[analytics] delegated', name, props || {});
-          }
+          try {
+            var isLocal = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '::1');
+            var hasDebugFlag = typeof window !== 'undefined' && window.location && window.location.search && window.location.search.indexOf('debug_analytics') !== -1;
+            if (isLocal || hasDebugFlag) {
+              console.debug('[analytics] delegated', name, props || {});
+            }
+          } catch (e) {}
         }
 
         document.addEventListener('click', function (e) {
