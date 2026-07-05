@@ -6,6 +6,7 @@ const currentYear = new Date().getFullYear();
 
 const companyLinks = [
   { text: 'About Us', href: '/about/' },
+  { text: 'Gallery', href: '/gallery/' },
   { text: 'Contact', href: '/contact/' },
 ];
 
@@ -13,7 +14,7 @@ const serviceLinks = [
   { text: 'Collections', href: '/showroom/' },
   { text: 'Bespoke Interiors', href: '/design-build/' },
   { text: 'Architects & Designers', href: '/trade/' },
-  { text: 'Gallery', href: '/gallery/' },
+  { text: 'Cost Calculator', href: '/estimate/' },
 ];
 ---
 
@@ -28,6 +29,8 @@ const serviceLinks = [
             alt="Jay Bhavani Furniture"
             class="h-9 w-auto"
             height="36"
+            loading="lazy"
+            decoding="async"
           />
           <span class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
             Jay Bhavani <span class="text-amber-400">Furniture</span>
@@ -88,6 +91,7 @@ const serviceLinks = [
           ))}
         </ul>
       </div>
+
 
       <!-- Contact Info -->
       <div>
