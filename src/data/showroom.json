@@ -40,5 +40,6 @@
     { "name": "Instagram", "url": "https://www.instagram.com/jaybhavanifurniture_in/", "icon": "tabler:brand-instagram" },
     { "name": "Facebook", "url": "https://www.facebook.com/jaybhavanifurniture.in/", "icon": "tabler:brand-facebook" },
     { "name": "Pinterest", "url": "https://in.pinterest.com/jaybhavanifurniture/", "icon": "tabler:brand-pinterest" }
-  ]
+  ],
+  "googleAnalyticsId": "G-CST38LPLW6"
 }

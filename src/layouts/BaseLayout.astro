@@ -156,6 +156,19 @@ const jsonLd = [
     <!-- Sitemap -->
     <link rel="sitemap" href="/sitemap-index.xml" />
 
+    {showroom.googleAnalyticsId && showroom.googleAnalyticsId !== 'G-XXXXXXXXXX' && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${showroom.googleAnalyticsId}`}></script>
+        <script is:inline define:vars={{ gaId: showroom.googleAnalyticsId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);} 
+          gtag('js', new Date());
+          // disable automatic pageview so SPA navigation can control pageviews if needed
+          gtag('config', gaId, { send_page_view: false });
+        </script>
+      </>
+    )}
+
     <meta name="generator" content={Astro.generator} />
     <slot name="head" />
   </head>
@@ -169,5 +182,47 @@ const jsonLd = [
     </main>
     <Footer />
     <PromoPopup />
+    {showroom.googleAnalyticsId && showroom.googleAnalyticsId !== 'G-XXXXXXXXXX' && (
+      <script is:inline>
+        // Send an initial page_view for the first full-page load
+        (function(){
+          if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+            try { window.gtag('event', 'page_view', { page_path: location.pathname, page_title: document.title }); } catch (e) {}
+          }
+        })();
+      </script>
+    )}
+
+    <script is:inline>
+      // Delegate clicks on elements with `data-analytics-event` to fire consistent events
+      (function () {
+        function sendEvent(name, props) {
+          if (typeof window === 'undefined') return;
+          if ('plausible' in window) {
+            try { window.plausible(name, { props: props || {} }); } catch (e) {}
+            return;
+          }
+          if ('gtag' in window) {
+            try { window.gtag('event', name, props || {}); } catch (e) {}
+            return;
+          }
+          if (import.meta.env && import.meta.env.DEV) {
+            console.debug('[analytics] delegated', name, props || {});
+          }
+        }
+
+        document.addEventListener('click', function (e) {
+          var el = e.target;
+          while (el && el.getAttribute && !el.getAttribute('data-analytics-event')) {
+            el = el.parentNode;
+          }
+          if (!el || !el.getAttribute) return;
+          var eventName = el.getAttribute('data-analytics-event');
+          if (!eventName) return;
+          var eventLabel = el.getAttribute('data-analytics-name') || el.textContent || undefined;
+          sendEvent(eventName, { event_label: eventLabel });
+        }, { passive: true });
+      })();
+    </script>
   </body>
 </html>

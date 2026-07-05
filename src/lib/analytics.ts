@@ -38,3 +38,21 @@ export function trackEvent(name: EventName, payload?: EventPayload): void {
     console.debug(`[analytics] ${name}`, payload || '');
   }
 }
+
+/**
+ * Send a pageview to GA4 or log in dev. Use this from SPA navigation or manual triggers.
+ */
+export function pageview(path?: string, title?: string): void {
+  if (typeof window !== 'undefined' && 'gtag' in window) {
+    (window as any).gtag('event', 'page_view', {
+      page_path: path || window.location.pathname,
+      page_title: title || document.title,
+    });
+    return;
+  }
+
+  if (import.meta.env.DEV) {
+    console.debug('[analytics] page_view', path || '');
+  }
+}
+

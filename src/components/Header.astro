@@ -59,6 +59,8 @@ const currentPath = Astro.url.pathname;
       <a
         href="/estimate/"
         class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm font-semibold text-neutral-900 shadow-sm hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-200"
+        data-analytics-event="cta_click"
+        data-analytics-name="free_estimate"
       >
         <Icon name="tabler:calculator" class="h-4 w-4 text-amber-500" />
         Free Estimate
@@ -69,6 +71,8 @@ const currentPath = Astro.url.pathname;
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-4 py-2 text-sm font-semibold text-neutral-900 shadow-sm hover:bg-amber-300 transition-colors duration-200"
+        data-analytics-event="cta_click"
+        data-analytics-name="whatsapp_cta"
       >
         <Icon name="tabler:brand-whatsapp" class="h-4 w-4" />
         WhatsApp
@@ -81,6 +85,8 @@ const currentPath = Astro.url.pathname;
         href="/estimate/"
         aria-label="Cost Estimator"
         class="rounded-lg p-2 text-amber-600 hover:bg-neutral-100 dark:text-amber-500 dark:hover:bg-neutral-800 transition-colors"
+        data-analytics-event="cta_click"
+        data-analytics-name="mobile_estimate"
       >
         <Icon name="tabler:calculator" class="h-6 w-6" />
       </a>
@@ -126,6 +132,8 @@ const currentPath = Astro.url.pathname;
           target="_blank"
           rel="noopener noreferrer"
           class="flex w-full items-center justify-center gap-2 rounded-lg bg-amber-400 px-4 py-2.5 text-sm font-semibold text-neutral-900 shadow-sm hover:bg-amber-300 transition-colors"
+          data-analytics-event="cta_click"
+          data-analytics-name="mobile_whatsapp_cta"
         >
           <Icon name="tabler:brand-whatsapp" class="h-5 w-5" />
           WhatsApp Us
@@ -142,6 +150,8 @@ const currentPath = Astro.url.pathname;
   rel="noopener noreferrer"
   class="fixed bottom-6 right-6 z-50 lg:hidden flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg hover:bg-green-600 transition-all duration-200 hover:scale-110"
   aria-label="Chat on WhatsApp"
+  data-analytics-event="cta_click"
+  data-analytics-name="floating_whatsapp"
 >
   <Icon name="tabler:brand-whatsapp" class="h-7 w-7" />
 </a>
