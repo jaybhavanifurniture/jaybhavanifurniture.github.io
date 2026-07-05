@@ -1,0 +1,65 @@
+[
+  {
+    "isActive": true,
+    "id": "monsoon-sale-2026",
+    "campaignType": "seasonal",
+    "badgeText": "Limited Time Offer",
+    "title": "Huge Monsoon Sale",
+    "discountText": "Up to 40% Off",
+    "startDate": "2026-07-01T00:00:00Z",
+    "endDate": "2026-07-03T23:59:59Z",
+    "subtitle": "Upgrade your home this monsoon with exclusive discounts on bespoke interiors and premium collections.",
+    "imageSrc": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop",
+    "imageAlt": "Huge Monsoon Sale Flyer",
+    "href": "/offer/",
+    "delayMs": 2500,
+    "terms": [
+      "Offer valid until August 31st, 2026",
+      "Applicable only on complete home interior packages",
+      "Cannot be combined with other ongoing offers"
+    ],
+    "ctaText": "Claim Offer via WhatsApp",
+    "whatsappMessage": "Hi Jay Bhavani Furniture, I'm interested in claiming the Monsoon Sale offer!"
+  },
+  {
+    "isActive": true,
+    "id": "diwali-sale-2026",
+    "campaignType": "seasonal",
+    "badgeText": "Festive Special",
+    "title": "Grand Diwali Sale",
+    "discountText": "Flat 50% Off",
+    "startDate": "2026-10-15T00:00:00Z",
+    "endDate": "2026-11-15T23:59:59Z",
+    "subtitle": "Light up your home this Diwali with our most premium festive collections at half the price.",
+    "imageSrc": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=800&auto=format&fit=crop",
+    "imageAlt": "Grand Diwali Sale Flyer",
+    "href": "/offer/",
+    "delayMs": 2500,
+    "terms": [
+      "Offer valid until November 15th, 2026",
+      "Applicable across all showroom collections",
+      "Cannot be combined with other ongoing offers"
+    ],
+    "ctaText": "Claim Offer via WhatsApp",
+    "whatsappMessage": "Hi Jay Bhavani Furniture, I'm interested in claiming the Diwali Sale offer!"
+  },
+  {
+    "isActive": true,
+    "id": "evergreen-consultation",
+    "campaignType": "evergreen",
+    "badgeText": "Signature Services",
+    "title": "Elevate Your Living Space",
+    "discountText": "Complimentary Design Consultation",
+    "subtitle": "Experience the finest craftsmanship with our premium bespoke furniture. Connect with our experts today to design the home of your dreams.",
+    "imageSrc": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=800&auto=format&fit=crop",
+    "imageAlt": "Premium Living Room Design",
+    "href": "/offer/",
+    "delayMs": 4000,
+    "terms": [
+      "Valid on complete room or home interior projects",
+      "Includes a 1-on-1 session with our senior design experts"
+    ],
+    "ctaText": "Book Free Consultation",
+    "whatsappMessage": "Hi Jay Bhavani Furniture, I would like to book a free design consultation for my home."
+  }
+]

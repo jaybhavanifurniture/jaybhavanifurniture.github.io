@@ -1,0 +1,167 @@
+---
+import promos from '../data/promo.json';
+import { Icon } from 'astro-icon/components';
+
+let currentPromo = promos.find((p) => {
+  if (!p.isActive || p.campaignType === 'evergreen') return false;
+  if (!p.startDate || !p.endDate) return false; // Appease TS compiler
+  const now = new Date().getTime();
+  const start = new Date(p.startDate).getTime();
+  const end = new Date(p.endDate).getTime();
+  return now >= start && now <= end;
+});
+
+if (!currentPromo) {
+  currentPromo = promos.find((p) => p.isActive && p.campaignType === 'evergreen');
+}
+
+if (!currentPromo) {
+  return null;
+}
+
+const { id, imageSrc, imageAlt, href, delayMs, endDate } = currentPromo;
+---
+
+<dialog
+  id="promo-dialog"
+  class="backdrop:bg-neutral-900/60 backdrop:backdrop-blur-sm rounded-2xl p-0 m-auto bg-transparent shadow-2xl overflow-visible max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] w-full"
+  data-promo-id={id}
+  data-delay={delayMs}
+  data-end-date={endDate}
+>
+  <div class="relative w-full h-full">
+    <!-- Close Button -->
+    <button
+      id="close-promo"
+      class="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white text-neutral-600 shadow-md hover:bg-neutral-100 hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white transition-colors"
+      aria-label="Close promotional offer"
+    >
+      <Icon name="tabler:x" class="h-5 w-5" />
+    </button>
+
+    <!-- Promotional Content -->
+    <a id="promo-link" href={href} class="block overflow-hidden rounded-2xl bg-white dark:bg-neutral-900 border-4 border-white dark:border-neutral-800 focus:outline-none focus:ring-4 focus:ring-amber-500 transition-all hover:scale-[1.02] duration-300 group relative">
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        class="w-full aspect-[4/3] object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+      
+      <!-- Optional hover overlay for extra polish -->
+      <div class="absolute inset-0 bg-neutral-900/0 group-hover:bg-neutral-900/5 transition-colors duration-300 pointer-events-none"></div>
+    </a>
+  </div>
+</dialog>
+
+<script>
+  function setupPromo() {
+    const dialog = document.getElementById('promo-dialog') as HTMLDialogElement | null;
+    const closeBtn = document.getElementById('close-promo');
+    
+    if (!dialog || !closeBtn) return;
+
+    const promoId = dialog.dataset.promoId;
+    const delay = parseInt(dialog.dataset.delay || '2500', 10);
+    const endDateStr = dialog.dataset.endDate;
+    const storageKey = `promo_seen_${promoId}`;
+
+    // Check if auto-expired
+    if (endDateStr && new Date().getTime() > new Date(endDateStr).getTime()) {
+      return;
+    }
+
+    // Check if user has already seen this specific promo
+    if (sessionStorage.getItem(storageKey)) {
+      return;
+    }
+
+    // Show popup after delay
+    setTimeout(() => {
+      // Only show if not already open
+      if (!dialog.open) {
+        dialog.showModal();
+        // Prevent body scroll when open
+        document.body.style.overflow = 'hidden';
+      }
+    }, delay);
+
+    // Close logic
+    const closeDialog = () => {
+      dialog.close();
+      sessionStorage.setItem(storageKey, 'true');
+      document.body.style.overflow = '';
+    };
+
+    closeBtn.addEventListener('click', closeDialog);
+    
+    // Set storage flag if they actually click the offer (so it doesn't pop up again later)
+    const promoLink = document.getElementById('promo-link');
+    if (promoLink) {
+      promoLink.addEventListener('click', () => {
+        sessionStorage.setItem(storageKey, 'true');
+      });
+    }
+
+    // Close when clicking outside the dialog content
+    dialog.addEventListener('click', (e) => {
+      const dialogDimensions = dialog.getBoundingClientRect();
+      if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+      ) {
+        closeDialog();
+      }
+    });
+
+    // Handle native escape key
+    dialog.addEventListener('close', () => {
+      sessionStorage.setItem(storageKey, 'true');
+      document.body.style.overflow = '';
+    });
+  }
+
+  // Run on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupPromo);
+  } else {
+    setupPromo();
+  }
+</script>
+
+<style>
+  /* Native dialog backdrop fade in */
+  dialog::backdrop {
+    animation: backdrop-fade-in 0.4s ease-out forwards;
+  }
+  
+  @keyframes backdrop-fade-in {
+    from { opacity: 0; backdrop-filter: blur(0px); }
+    to { opacity: 1; backdrop-filter: blur(4px); }
+  }
+
+  /* Dialog pop-in animation */
+  dialog[open] {
+    animation: dialog-pop-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes dialog-pop-in {
+    from { 
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* Reset default dialog styles */
+  dialog:not([open]) {
+    pointer-events: none;
+    opacity: 0;
+  }
+</style>

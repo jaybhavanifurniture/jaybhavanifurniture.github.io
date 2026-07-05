@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import promos from '../data/promo.json';
+import showroom from '../data/showroom.json';
+import { Icon } from 'astro-icon/components';
+
+let currentPromo = promos.find((p) => {
+  if (!p.isActive || p.campaignType === 'evergreen') return false;
+  if (!p.startDate || !p.endDate) return false; // Appease TS compiler
+  const now = new Date().getTime();
+  const start = new Date(p.startDate).getTime();
+  const end = new Date(p.endDate).getTime();
+  return now >= start && now <= end;
+});
+
+if (!currentPromo) {
+  currentPromo = promos.find((p) => p.isActive && p.campaignType === 'evergreen');
+}
+
+let finalWaUrl = '';
+let metadata = {
+  title: "Current Offers & Promotions",
+  description: "Discover the latest exclusive deals and premium furniture offers at Jay Bhavani Furniture.",
+};
+
+if (currentPromo) {
+  const waUrl = new URL(showroom.whatsappUrl);
+  waUrl.searchParams.set('text', currentPromo.whatsappMessage);
+  finalWaUrl = waUrl.toString();
+  metadata.title = currentPromo.title;
+  metadata.description = currentPromo.subtitle;
+}
+---
+
+<BaseLayout title={metadata.title} description={metadata.description}>
+  {currentPromo && (
+  <section id="promo-active-section" class="bg-neutral-50 dark:bg-neutral-950 min-h-[calc(100vh-140px)] flex items-center py-8 sm:py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+      
+      <!-- Back Button -->
+      <div class="mb-6 lg:mb-8">
+        <a href="/" class="group inline-flex items-center gap-3 text-sm font-medium text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors">
+          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-200/50 dark:bg-neutral-800 transition-colors group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700">
+            <Icon name="tabler:arrow-left" class="h-4 w-4" />
+          </span>
+          Back to Home
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+        
+        <!-- Text Content -->
+        <div class="order-2 lg:order-1 flex flex-col justify-center text-center lg:text-left space-y-6">
+          
+          <div class="space-y-4">
+            <div class="mx-auto lg:mx-0 inline-flex items-center gap-2 rounded-full bg-amber-100 px-3 py-1 text-xs font-bold uppercase tracking-widest text-amber-800 dark:bg-amber-500/10 dark:text-amber-400 w-fit">
+              <Icon name="tabler:discount" class="h-4 w-4" />
+              {currentPromo.badgeText || "Limited Time Offer"}
+            </div>
+            
+            <h1 class="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white sm:text-4xl lg:text-5xl leading-tight">
+              {currentPromo.title}
+            </h1>
+            
+            {currentPromo.discountText && (
+              <div class="text-2xl font-bold text-amber-600 dark:text-amber-500">
+                {currentPromo.discountText}
+              </div>
+            )}
+            
+            <p class="text-lg leading-relaxed text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto lg:mx-0">
+              {currentPromo.subtitle}
+            </p>
+
+            {currentPromo.endDate && (
+              <div class="flex items-center justify-center lg:justify-start gap-2 text-sm font-semibold text-rose-600 dark:text-rose-400">
+                <Icon name="tabler:clock" class="h-4 w-4" />
+                <span>Offer expires: {new Date(currentPromo.endDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+              </div>
+            )}
+          </div>
+
+          <!-- Terms List -->
+          {currentPromo.terms && currentPromo.terms.length > 0 && (
+            <div class="rounded-2xl bg-neutral-100/80 dark:bg-neutral-900/50 p-6 text-left w-full mx-auto max-w-xl lg:mx-0">
+              <h2 class="text-sm font-bold uppercase tracking-widest text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+                <Icon name="tabler:info-circle" class="h-5 w-5 text-amber-500" />
+                Offer Details
+              </h2>
+              <ul class="space-y-3">
+                {currentPromo.terms.map((term) => (
+                  <li class="flex items-start gap-3 text-neutral-700 dark:text-neutral-300 text-sm">
+                    <Icon name="tabler:check" class="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                    <span class="leading-relaxed">{term}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- CTA Button -->
+          <div class="flex flex-col items-center lg:items-start gap-3 pt-2">
+            <a
+              href={finalWaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-3 rounded-full bg-neutral-900 dark:bg-white px-8 py-3.5 text-base font-bold text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-all focus:outline-none focus:ring-4 focus:ring-neutral-200 dark:focus:ring-neutral-800 w-full sm:w-auto shadow-lg shadow-neutral-900/10 dark:shadow-white/10"
+            >
+              <Icon name="tabler:brand-whatsapp" class="h-5 w-5 text-green-500" />
+              {currentPromo.ctaText}
+            </a>
+            <span class="text-sm font-medium text-neutral-500 dark:text-neutral-400 flex items-center gap-2">
+              <Icon name="tabler:shield-check" class="h-4 w-4 text-green-600 dark:text-green-500" /> 
+              No commitment required. Chat with our experts.
+            </span>
+          </div>
+          
+        </div>
+
+        <!-- Image Content -->
+        <div class="order-1 lg:order-2 w-full flex justify-center">
+          <div class="relative w-full aspect-video lg:aspect-[4/3] rounded-3xl overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+            <img 
+              src={currentPromo.imageSrc} 
+              alt={currentPromo.imageAlt} 
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-700 ease-out"
+              loading="eager"
+              fetchpriority="high"
+            />
+            <!-- Inner Border overlay to give a crisp edge without ugly rings -->
+            <div class="absolute inset-0 rounded-3xl border border-black/5 dark:border-white/5 pointer-events-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  )}
+
+  <section id="promo-expired-section" class={`bg-neutral-50 dark:bg-neutral-950 min-h-[calc(100vh-140px)] flex items-center py-12 sm:py-20 ${currentPromo ? 'hidden' : ''}`}>
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 w-full text-center">
+      <div class="mb-8 flex justify-center">
+        <span class="flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-500/10">
+          <Icon name="tabler:stars" class="h-8 w-8 text-amber-600 dark:text-amber-400" />
+        </span>
+      </div>
+      <h1 class="text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-white sm:text-5xl mb-6">
+        Exclusive Offers Coming Soon
+      </h1>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400 mb-10 leading-relaxed">
+        Our previous promotion has officially ended, but we are always crafting new ways to help you upgrade your home. Explore our current premium collections or chat with our design experts today.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/" class="inline-flex items-center justify-center gap-2 rounded-full bg-neutral-900 dark:bg-white px-8 py-3.5 text-base font-bold text-white dark:text-neutral-900 shadow-xl shadow-neutral-900/10 dark:shadow-white/10 hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-all w-full sm:w-auto">
+          Explore Collections
+        </a>
+        <a href={showroom.whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-full bg-white dark:bg-neutral-800 border-2 border-neutral-200 dark:border-neutral-700 px-8 py-3.5 text-base font-bold text-neutral-900 dark:text-white hover:border-neutral-300 dark:hover:border-neutral-600 transition-all w-full sm:w-auto">
+          <Icon name="tabler:brand-whatsapp" class="h-5 w-5 text-green-500" />
+          Chat with Experts
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {currentPromo && (
+    <script define:vars={{ endDate: currentPromo.endDate }}>
+      if (endDate) {
+        const end = new Date(endDate).getTime();
+        const now = new Date().getTime();
+        if (now > end) {
+          const activeEl = document.getElementById('promo-active-section');
+          const expiredEl = document.getElementById('promo-expired-section');
+          if (activeEl && expiredEl) {
+            activeEl.style.display = 'none';
+            expiredEl.classList.remove('hidden');
+          }
+        }
+      }
+    </script>
+  )}
+</BaseLayout>

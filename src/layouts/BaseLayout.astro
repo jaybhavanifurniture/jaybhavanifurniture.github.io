@@ -3,6 +3,8 @@ import "../styles/global.css";
 import showroom from "../data/showroom.json";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import PromoPopup from "../components/PromoPopup.astro";
+import AnnouncementBar from "../components/AnnouncementBar.astro";
 
 interface Props {
   title: string;
@@ -129,10 +131,12 @@ const jsonLd = [
   <body
     class="min-h-screen flex flex-col bg-neutral-50 text-neutral-800 dark:bg-neutral-950 dark:text-neutral-200 antialiased"
   >
+    <AnnouncementBar />
     <Header />
     <main class="flex-1">
       <slot />
     </main>
     <Footer />
+    <PromoPopup />
   </body>
 </html>
