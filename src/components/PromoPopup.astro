@@ -19,7 +19,7 @@ if (!currentPromo) {
   return null;
 }
 
-const { id, imageSrc, imageAlt, href, delayMs, endDate } = currentPromo;
+const { id, imageSrc, imageAlt, href, delayMs, endDate, badgeText, title, discountText, subtitle, ctaText } = currentPromo;
 ---
 
 <dialog
@@ -40,18 +40,49 @@ const { id, imageSrc, imageAlt, href, delayMs, endDate } = currentPromo;
     </button>
 
     <!-- Promotional Content -->
-    <a id="promo-link" href={href} class="block overflow-hidden rounded-2xl bg-white dark:bg-neutral-900 border-4 border-white dark:border-neutral-800 focus:outline-none focus:ring-4 focus:ring-amber-500 transition-all hover:scale-[1.02] duration-300 group relative">
+    <!-- Promotional Content -->
+    <div class="block overflow-hidden rounded-2xl bg-white dark:bg-neutral-900 border-4 border-white dark:border-neutral-800 shadow-xl flex flex-col relative">
       <img
         src={imageSrc}
         alt={imageAlt}
-        class="w-full aspect-[4/3] object-cover"
+        class="w-full aspect-video object-cover"
         loading="lazy"
         decoding="async"
       />
       
-      <!-- Optional hover overlay for extra polish -->
-      <div class="absolute inset-0 bg-neutral-900/0 group-hover:bg-neutral-900/5 transition-colors duration-300 pointer-events-none"></div>
-    </a>
+      <div class="p-6 text-center flex flex-col items-center justify-center bg-white dark:bg-neutral-900">
+        {badgeText && (
+          <span class="inline-block px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400 rounded-full text-[10px] sm:text-xs font-bold tracking-wider uppercase mb-3">
+            {badgeText}
+          </span>
+        )}
+        
+        <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white mb-2 leading-tight">
+          {title}
+        </h3>
+        
+        {discountText && (
+          <p class="text-amber-600 dark:text-amber-500 font-extrabold text-lg sm:text-xl mb-3">
+            {discountText}
+          </p>
+        )}
+        
+        {subtitle && (
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6 max-w-sm mx-auto">
+            {subtitle}
+          </p>
+        )}
+        
+        <a 
+          id="promo-link" 
+          href={href} 
+          class="inline-flex w-full items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-xl font-bold transition-all hover:scale-[1.02] duration-300"
+        >
+          {ctaText || 'View Offer'}
+          <Icon name="tabler:arrow-right" class="w-5 h-5" />
+        </a>
+      </div>
+    </div>
   </div>
 </dialog>
 
