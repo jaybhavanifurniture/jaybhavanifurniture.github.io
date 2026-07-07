@@ -88,14 +88,20 @@ const postJsonLd = {
       <nav class="flex text-sm text-neutral-500 dark:text-neutral-400 mb-8" aria-label="Breadcrumb">
         <ol class="flex flex-wrap items-center gap-1 sm:gap-1.5">
           <li>
-            <a href="/" class="hover:text-amber-500 transition-colors flex items-center gap-1">
+            <a href="/"
+               data-analytics-event="nav_click"
+               data-analytics-name="breadcrumb_home"
+               class="hover:text-amber-500 transition-colors flex items-center gap-1">
               <Icon name="tabler:home" class="h-3.5 w-3.5" />
               Home
             </a>
           </li>
           <li class="flex items-center">
             <Icon name="tabler:chevron-right" class="h-4 w-4 text-neutral-400" />
-            <a href="/blog/" class="ml-1 md:ml-2 hover:text-amber-500 transition-colors">Blog</a>
+            <a href="/blog/"
+               data-analytics-event="nav_click"
+               data-analytics-name="breadcrumb_blog"
+               class="ml-1 md:ml-2 hover:text-amber-500 transition-colors">Blog</a>
           </li>
           <li class="flex items-center">
             <Icon name="tabler:chevron-right" class="h-4 w-4 text-neutral-400" />
@@ -161,6 +167,8 @@ const postJsonLd = {
               href={whatsappShareUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-analytics-event="share_click"
+              data-analytics-name="whatsapp_desktop"
               class="flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-green-600 border border-green-200/50 hover:bg-green-100 transition-colors"
               aria-label="Share on WhatsApp"
             >
@@ -171,6 +179,8 @@ const postJsonLd = {
               href={twitterShareUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-analytics-event="share_click"
+              data-analytics-name="twitter_desktop"
               class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-200/50 hover:bg-blue-100 transition-colors"
               aria-label="Share on X (Twitter)"
             >
@@ -181,6 +191,8 @@ const postJsonLd = {
               href={linkedinShareUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-analytics-event="share_click"
+              data-analytics-name="linkedin_desktop"
               class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 border border-indigo-200/50 hover:bg-indigo-100 transition-colors"
               aria-label="Share on LinkedIn"
             >
@@ -190,6 +202,8 @@ const postJsonLd = {
             <button
               type="button"
               id="share-copy-desktop"
+              data-analytics-event="share_click"
+              data-analytics-name="copylink_desktop"
               class="relative flex h-10 w-10 items-center justify-center rounded-full bg-neutral-50 text-neutral-600 border border-neutral-200/50 hover:bg-neutral-100 cursor-pointer transition-colors"
               aria-label="Copy Link"
             >
@@ -228,6 +242,8 @@ const postJsonLd = {
                 href={whatsappShareUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-analytics-event="share_click"
+                data-analytics-name="whatsapp_mobile"
                 class="flex h-9 w-9 items-center justify-center rounded-full bg-green-50 text-green-600 border border-green-200/50"
                 aria-label="Share on WhatsApp"
               >
@@ -238,6 +254,8 @@ const postJsonLd = {
                 href={twitterShareUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-analytics-event="share_click"
+                data-analytics-name="twitter_mobile"
                 class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-200/50"
                 aria-label="Share on X (Twitter)"
               >
@@ -248,6 +266,8 @@ const postJsonLd = {
                 href={linkedinShareUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-analytics-event="share_click"
+                data-analytics-name="linkedin_mobile"
                 class="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 border border-indigo-200/50"
                 aria-label="Share on LinkedIn"
               >
@@ -257,6 +277,8 @@ const postJsonLd = {
               <button
                 type="button"
                 id="share-copy-mobile"
+                data-analytics-event="share_click"
+                data-analytics-name="copylink_mobile"
                 class="relative flex h-9 w-9 items-center justify-center rounded-full bg-neutral-50 text-neutral-600 border border-neutral-200/50 cursor-pointer"
                 aria-label="Copy Link"
               >
@@ -278,6 +300,8 @@ const postJsonLd = {
               </p>
               <a
                 href="/about/"
+                data-analytics-event="nav_click"
+                data-analytics-name="author_workshop_story"
                 class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-amber-500 hover:text-amber-600 dark:hover:text-amber-400"
               >
                 Our workshop story &rarr;
@@ -297,7 +321,10 @@ const postJsonLd = {
           <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {relatedPosts.map((relatedPost) => (
               <article class="flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900">
-                <a href={`/blog/${relatedPost.id}/`} class="relative block aspect-[16/10] overflow-hidden group">
+                <a href={`/blog/${relatedPost.id}/`}
+                   data-analytics-event="blog_click"
+                   data-analytics-name={`related_image_${relatedPost.id}`}
+                   class="relative block aspect-[16/10] overflow-hidden group">
                   <img
                     src={relatedPost.data.heroImage}
                     alt={relatedPost.data.title}
@@ -312,14 +339,20 @@ const postJsonLd = {
                       {relatedPost.data.category}
                     </span>
                     <h4 class="mt-2 text-base font-bold text-neutral-900 dark:text-neutral-100 line-clamp-2">
-                      <a href={`/blog/${relatedPost.id}/`} class="hover:text-amber-500 transition-colors">
+                      <a href={`/blog/${relatedPost.id}/`}
+                         data-analytics-event="blog_click"
+                         data-analytics-name={`related_title_${relatedPost.id}`}
+                         class="hover:text-amber-500 transition-colors">
                         {relatedPost.data.title}
                       </a>
                     </h4>
                   </div>
                   <div class="mt-4 flex items-center justify-between border-t border-neutral-100 pt-3 dark:border-neutral-800 text-[11px] text-neutral-500">
                     <span>{getReadingTime(relatedPost.body || '')} min read</span>
-                    <a href={`/blog/${relatedPost.id}/`} class="font-bold text-amber-500 hover:text-amber-600">Read &rarr;</a>
+                    <a href={`/blog/${relatedPost.id}/`}
+                       data-analytics-event="blog_click"
+                       data-analytics-name={`related_button_${relatedPost.id}`}
+                       class="font-bold text-amber-500 hover:text-amber-600">Read &rarr;</a>
                   </div>
                 </div>
               </article>
