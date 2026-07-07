@@ -5,10 +5,9 @@ import { Icon } from 'astro-icon/components';
 const navLinks = [
   { text: 'Collections', href: '/showroom/' },
   { text: 'Bespoke Interiors', href: '/design-build/' },
-  { text: 'Architects & Designers', href: '/trade/' },
   { text: 'About', href: '/about/' },
+  { text: 'Blog', href: '/blog/' },
   { text: 'Contact', href: '/contact/' },
-  { text: 'Gallery', href: '/gallery/' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -36,7 +35,7 @@ const currentPath = Astro.url.pathname;
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden xl:flex items-center gap-1" aria-label="Main navigation">
+    <nav class="hidden lg:flex items-center gap-1" aria-label="Main navigation">
       {navLinks.map((link) => (
         <a
           href={link.href}
@@ -54,7 +53,7 @@ const currentPath = Astro.url.pathname;
     </nav>
 
     <!-- Desktop CTA -->
-    <div class="hidden xl:flex items-center gap-3">
+    <div class="hidden lg:flex items-center gap-3">
 
       <a
         href="/estimate/"
@@ -80,7 +79,7 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <!-- Mobile CTA & Menu Button -->
-    <div class="flex xl:hidden items-center gap-1">
+    <div class="flex lg:hidden items-center gap-1">
       <a
         href="/estimate/"
         aria-label="Cost Estimator"
@@ -108,7 +107,7 @@ const currentPath = Astro.url.pathname;
   <!-- Mobile Navigation -->
   <div
     id="mobile-menu"
-    class="hidden xl:hidden border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950"
+    class="hidden lg:hidden border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950"
   >
     <nav class="mx-auto max-w-7xl px-4 py-4 sm:px-6" aria-label="Mobile navigation">
       <div class="flex flex-col gap-1">
