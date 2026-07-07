@@ -415,5 +415,9 @@ const postJsonLd = {
     setupClipboardSharing();
   }
 
-  document.addEventListener('DOMContentLoaded', initPost);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPost);
+  } else {
+    initPost();
+  }
 </script>

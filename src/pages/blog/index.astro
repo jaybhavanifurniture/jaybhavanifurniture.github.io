@@ -13,10 +13,6 @@ const allPosts = (await getCollection('blog'))
 // Find featured post (explicitly marked featured, or the newest one)
 const featuredPost = allPosts.find((post) => post.data.featured) || allPosts[0];
 
-// Exclude featured post from the main grid list to avoid duplication,
-// but keep it if someone filters for it.
-const gridPosts = allPosts.filter((post) => post.id !== featuredPost?.id);
-
 // Gather unique categories for the filters
 const categories = ['All', ...new Set(allPosts.map((post) => post.data.category))];
 
@@ -110,27 +106,36 @@ const blogJsonLd = {
   <section class="py-16 sm:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       
-      <!-- Featured Post (Latest or Selected) -->
+      <!-- Featured Post Area (Visible only on default landing view) -->
       {featuredPost && (
-        <div id="featured-section" class="post-card mb-16 overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-md dark:border-neutral-800/80 dark:bg-neutral-900 transition-all hover:shadow-lg lg:grid lg:grid-cols-12"
+        <div id="featured-section" class="mb-16 overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-md dark:border-neutral-800/80 dark:bg-neutral-900 transition-all hover:shadow-lg lg:grid lg:grid-cols-12 group"
              data-category={featuredPost.data.category}
              data-title={featuredPost.data.title}
              data-description={featuredPost.data.description}>
-          <div class="relative min-h-[300px] lg:col-span-7">
-            <img
-              src={featuredPost.data.heroImage}
-              alt={featuredPost.data.title}
-              class="absolute inset-0 h-full w-full object-cover"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            />
+          <div class="relative min-h-[300px] lg:col-span-7 overflow-hidden">
+            <a href={`/blog/${featuredPost.id}/`}
+               data-analytics-event="blog_click"
+               data-analytics-name={`featured_image_${featuredPost.id}`}
+               class="absolute inset-0 h-full w-full">
+              <img
+                src={featuredPost.data.heroImage}
+                alt={featuredPost.data.title}
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-103"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </a>
             <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/50 via-transparent to-transparent lg:hidden"></div>
           </div>
           
           <div class="flex flex-col justify-between p-6 sm:p-8 lg:col-span-5 lg:p-10">
             <div>
-              <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1 rounded bg-amber-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-sm shadow-amber-500/10 uppercase tracking-wider">
+                  <Icon name="tabler:star-filled" class="h-3 w-3" />
+                  Featured
+                </span>
                 <span class="inline-flex items-center rounded-md bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 dark:bg-amber-950/30 dark:text-amber-400 border border-amber-200/50 dark:border-amber-900/30">
                   {featuredPost.data.category}
                 </span>
@@ -144,11 +149,10 @@ const blogJsonLd = {
                 </span>
               </div>
               
-              <h2 class="mt-4 text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl">
+              <h2 class="mt-4 text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl hover:text-amber-500 transition-colors">
                 <a href={`/blog/${featuredPost.id}/`}
                    data-analytics-event="blog_click"
-                   data-analytics-name={`featured_title_${featuredPost.id}`}
-                   class="hover:text-amber-500 transition-colors">
+                   data-analytics-name={`featured_title_${featuredPost.id}`}>
                   {featuredPost.data.title}
                 </a>
               </h2>
@@ -159,36 +163,31 @@ const blogJsonLd = {
             </div>
             
             <div class="mt-8 flex items-center justify-between border-t border-neutral-100 pt-6 dark:border-neutral-800">
-              <div class="flex items-center gap-2">
-                <span class="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                  {featuredPost.data.author}
-                </span>
-                <span class="text-xs text-neutral-400">&bull;</span>
-                <span class="text-xs text-neutral-500 dark:text-neutral-400 flex items-center gap-1">
-                  <Icon name="tabler:clock" class="h-3.5 w-3.5" />
-                  {getReadingTime(featuredPost.body || '')} min read
-                </span>
-              </div>
+              <span class="text-xs text-neutral-500 dark:text-neutral-400 flex items-center gap-1">
+                <Icon name="tabler:clock" class="h-3.5 w-3.5" />
+                {getReadingTime(featuredPost.body || '')} min read
+              </span>
               
               <a
                 href={`/blog/${featuredPost.id}/`}
                 data-analytics-event="blog_click"
                 data-analytics-name={`featured_button_${featuredPost.id}`}
-                class="inline-flex items-center gap-1.5 text-sm font-bold text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 group/link"
+                class="inline-flex items-center gap-1 text-xs font-bold text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 group/link"
               >
                 Read Article
-                <Icon name="tabler:arrow-right" class="h-4 w-4 transition-transform duration-200 group-hover/link:translate-x-1" />
+                <Icon name="tabler:chevron-right" class="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5" />
               </a>
             </div>
           </div>
         </div>
       )}
 
-      <!-- Normal Posts Grid -->
-      <div id="posts-grid" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {gridPosts.map((post) => (
+      <!-- Standard Grid (All posts loop, featured post conditionally hidden in default view) -->
+      <div id="posts-grid" data-featured-id={featuredPost?.id} class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {allPosts.map((post) => (
           <article
-            class="post-card flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+            id={post.id}
+            class="post-card group flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900"
             data-category={post.data.category}
             data-title={post.data.title}
             data-description={post.data.description}
@@ -197,11 +196,11 @@ const blogJsonLd = {
             <a href={`/blog/${post.id}/`}
                data-analytics-event="blog_click"
                data-analytics-name={`grid_image_${post.id}`}
-               class="relative block aspect-[16/10] overflow-hidden group">
+               class="relative block aspect-[16/10] overflow-hidden">
               <img
                 src={post.data.heroImage}
                 alt={post.data.title}
-                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-103"
                 loading="lazy"
                 decoding="async"
               />
@@ -326,41 +325,61 @@ const blogJsonLd = {
     const searchInput = document.getElementById('search-blog') as HTMLInputElement | null;
     const categoryButtons = document.querySelectorAll<HTMLElement>('.category-btn');
     const postCards = document.querySelectorAll<HTMLElement>('.post-card');
-    const noResults = document.getElementById('no-results');
-    const resetBtn = document.getElementById('reset-search');
-    const featuredSection = document.getElementById('featured-section');
+    const noResults = document.getElementById('no-results') as HTMLElement | null;
+    const resetBtn = document.getElementById('reset-search') as HTMLElement | null;
+    const featuredSection = document.getElementById('featured-section') as HTMLElement | null;
+    const postsGrid = document.getElementById('posts-grid') as HTMLElement | null;
+    const featuredPostId = postsGrid?.getAttribute('data-featured-id');
 
     let activeCategory = 'all';
     let searchQuery = '';
 
     function filterPosts() {
       let visibleCount = 0;
+      const isDefaultState = activeCategory === 'all' && searchQuery === '';
 
+      // Toggle the top editorial featured card display based on state
+      if (featuredSection) {
+        if (isDefaultState) {
+          featuredSection.classList.remove('hidden');
+          featuredSection.style.display = '';
+        } else {
+          featuredSection.classList.add('hidden');
+          featuredSection.style.display = 'none';
+        }
+      }
+
+      // Filter standard grid list
       postCards.forEach((card) => {
         const category = card.getAttribute('data-category')?.toLowerCase() || '';
         const title = card.getAttribute('data-title')?.toLowerCase() || '';
         const description = card.getAttribute('data-description')?.toLowerCase() || '';
+        const isFeaturedItem = card.id === featuredPostId;
 
         const matchesCategory = activeCategory === 'all' || category === activeCategory;
         const matchesSearch = title.includes(searchQuery) || description.includes(searchQuery);
 
         if (matchesCategory && matchesSearch) {
-          card.classList.remove('hidden');
-          // If the featured card is visible, show it as a flex/grid block
-          if (card.id === 'featured-section') {
-            card.style.display = 'grid';
+          // If we are in the default landing view, hide the featured post in the grid to avoid duplicate listing
+          if (isDefaultState && isFeaturedItem) {
+            card.classList.add('hidden');
+            card.style.display = 'none';
           } else {
-            card.style.display = 'flex';
+            card.classList.remove('hidden');
+            card.style.display = '';
+            visibleCount++;
           }
-          visibleCount++;
         } else {
           card.classList.add('hidden');
           card.style.display = 'none';
         }
       });
 
+      // Total items visible
+      const totalVisible = visibleCount + (isDefaultState && featuredSection ? 1 : 0);
+
       if (noResults) {
-        if (visibleCount === 0) {
+        if (totalVisible === 0) {
           noResults.classList.remove('hidden');
         } else {
           noResults.classList.add('hidden');
@@ -411,8 +430,15 @@ const blogJsonLd = {
     };
 
     resetBtn?.addEventListener('click', handleReset);
+    
+    // Run initial filter check to hide the duplicated post inside the grid
+    filterPosts();
   }
 
   // Handle Astro page transitions / page load
-  document.addEventListener('DOMContentLoaded', initFilters);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFilters);
+  } else {
+    initFilters();
+  }
 </script>

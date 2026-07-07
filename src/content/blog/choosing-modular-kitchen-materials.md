@@ -6,7 +6,7 @@ heroImage: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=forma
 author: "Jay Bhavani Furniture"
 category: "Modular Kitchen"
 tags: ["Kitchen", "Materials", "Plywood", "Interior Design"]
-featured: true
+featured: false
 draft: false
 ---
 

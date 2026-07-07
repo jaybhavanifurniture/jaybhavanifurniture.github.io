@@ -6,7 +6,7 @@ heroImage: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=fo
 author: "Jay Bhavani Furniture"
 category: "Materials"
 tags: ["Teak Wood", "Sheesham Wood", "Wood Comparison", "Gujarat Homes"]
-featured: false
+featured: true
 draft: false
 ---
 
